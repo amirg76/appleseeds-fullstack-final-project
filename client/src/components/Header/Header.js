@@ -18,22 +18,22 @@ const Header = () => {
 
   return (
     <nav className="header-continer">
-      <img className="logo" src="/assets/img/logo3.png" alt=""></img>
+      <img className="logo" src="/assets/img/logo.png" alt=""></img>
 
       <ul ref={navRef}>
         <li>
           <Link to="/" onClick={showLinks}>
-            Main
+            ראשי
           </Link>
         </li>
         <li>
           <Link to="/media" onClick={showLinks}>
-            Media
+            מדדים
           </Link>
         </li>
         <li>
           <Link to="/reviews" onClick={showLinks}>
-            Reviews
+            כתבות
           </Link>
         </li>
         <button onClick={showNavBar} className="nav-btn nav-close-btn">
@@ -45,7 +45,6 @@ const Header = () => {
         <FaBars />
       </button>
     </nav>
-    // <div>hola kk</div>
   );
 };
 

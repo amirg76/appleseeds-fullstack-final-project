@@ -2,6 +2,7 @@
 
 import "./App.css";
 import Header from "./components/Header/Header.js";
+import MainPage from "./components/MainPage/MainPage";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -9,12 +10,12 @@ function App() {
     <BrowserRouter forceRefresh={true}>
       <Header />
 
-      {/* <Switch>
-      <Route path="/" exact component={MainPage} />
-      <Route path="/media" exact component={MediaPage} />
+      <Switch>
+        <Route path="/" exact component={MainPage} />
+        {/* <Route path="/media" exact component={MediaPage} />
       <Route path="/reviews" exact component={ReviewsPage} />
-      <Route path="/:id" exact component={CharacterMore} />
-    </Switch> */}
+      <Route path="/:id" exact component={CharacterMore} /> */}
+      </Switch>
     </BrowserRouter>
   );
 }
