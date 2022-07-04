@@ -1,11 +1,12 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 
 import { myContext } from "../Context/mycontext.js";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Header.css";
 const Header = () => {
-  const { navToggle, setNavToggle } = useContext(myContext);
+  const { navToggle, setNavToggle, login, setLogin } = useContext(myContext);
+
   const navRef = useRef();
   const showNavBar = () => {
     navRef.current.classList.toggle("responsive_nav");
@@ -14,6 +15,10 @@ const Header = () => {
   const showLinks = () => {
     navRef.current.classList.toggle("responsive_nav");
     setNavToggle(!navToggle);
+  };
+  const showLogin = () => {
+    console.log(login);
+    setLogin(true);
   };
 
   return (
@@ -35,6 +40,13 @@ const Header = () => {
           <Link to="/reviews" onClick={showLinks}>
             כתבות
           </Link>
+        </li>
+        <li>
+          {/* <Link to="/login" onClick={showLogin}> */}
+          <button onClick={showLogin} className="login-button">
+            כניסה לחשבון
+          </button>
+          {/* </Link> */}
         </li>
         <button onClick={showNavBar} className="nav-btn nav-close-btn">
           <FaTimes />

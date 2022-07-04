@@ -52,6 +52,7 @@ const Carousel = () => {
         }}
       >
         <img className="dots-img" src={photos[i].url} />
+
         <h3 className="dots-text">{photos[i].text}</h3>
         {/* {i + 1} */}
       </div>
@@ -88,10 +89,10 @@ const Carousel = () => {
       <Slider {...settings}>
         {photos.map((photo) => {
           return (
-            <div className="photo-card" key={photos.name}>
+            <div className="photo-card" key={photo.name}>
               <img className="photo-carousel" src={photo.url} />
-              <div class="img-area">
-                <div class="img-text-area">
+              <div className="img-area">
+                <div className="img-text-area">
                   {console.log(photo.title)}
                   <span>{photo.title}</span>
                 </div>

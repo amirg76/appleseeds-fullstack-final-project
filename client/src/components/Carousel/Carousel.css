@@ -94,12 +94,19 @@ slides .slick-prev,
 
 .dots-text {
   padding-top: 1vh;
+  font-size: 1vw;
   color: black;
 }
 .dots-main {
   position: relative;
 }
 @media (max-width: 1024px) {
+  .dots-text {
+    font-size: 2vw;
+  }
+  .img-text-area span {
+    font-size: 3vw;
+  }
 }
 
 @media (max-width: 800px) {
@@ -110,5 +117,9 @@ slides .slick-prev,
   .slick-dots li {
     margin: 0 1vw;
     width: 20vw;
+  }
+  .slick-dots ul {
+    display: flex;
+    justify-content: center;
   }
 }
