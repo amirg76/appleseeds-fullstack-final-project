@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { myContext } from "../Context/mycontext.js";
 import Carousel from "../Carousel/Carousel";
 import CardContainer from "../CardContainer/CardContainer";
+import Header from "../Header/Header.js";
 import Tools from "../Tools/Tools";
 import "./MainPage.css";
 import LoginForm from "../LoginForm/LoginForm.js";
@@ -22,6 +23,7 @@ const MainPage = () => {
     </div>
   ) : (
     <>
+      <Header />
       {login && (
         <div className="login-form-section">
           <LoginForm
