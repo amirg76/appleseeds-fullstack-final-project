@@ -66,12 +66,22 @@ const LoginForm = ({ openLogin, closeAll }) => {
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>שם משתמש </label>
-          <input type="text" name="uname" required />
+          <input
+            type="text"
+            name="uname"
+            required
+            className="login-form-input"
+          />
           {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
           <label>סיסמא </label>
-          <input type="password" name="pass" required />
+          <input
+            type="password"
+            name="pass"
+            required
+            className="login-form-input"
+          />
           {renderErrorMessage("pass")}
         </div>
         <div className="button-container">

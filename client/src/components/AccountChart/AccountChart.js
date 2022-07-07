@@ -60,11 +60,11 @@ const data = [
   },
 ];
 
-const AccountChart = () => {
+const AccountChart = ({ title, aspect }) => {
   return (
     <div className="account-chart">
-      <div className="account-chart-title">Total By Month</div>
-      <ResponsiveContainer width="100%" aspect={2 / 1}>
+      <div className="account-chart-title">סך הכול לפי חודש</div>
+      <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart
           width={730}
           height={250}

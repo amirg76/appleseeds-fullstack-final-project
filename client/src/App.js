@@ -4,19 +4,32 @@ import "./App.css";
 import Header from "./components/Header/Header.js";
 import MainPage from "./components/MainPage/MainPage";
 import MainBoard from "./components/MainBoard/MainBoard";
+import UsersData from "./components/UsersData/UsersData";
+import SingleUser from "./components/SingleUser/SingleUser";
+import NewUser from "./components/NewUser/NewUser";
+import { productInputs, userInputs } from "./formSource";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+import { useContext } from "react";
+import { myContext } from "./components/Context/mycontext";
+import "./StyleDark.scss";
 function App() {
+  const { dark } = useContext(myContext);
   return (
-    <div className="main-app">
+    // <div className="main-app">
+    <div className={dark ? "main-app dark" : "main-app"}>
       <BrowserRouter forceRefresh={true}>
-        {/* <Header /> */}
-
         <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/a" exact component={MainBoard} />
-          {/* <Route path="/reviews" exact component={ReviewsPage} />
-      <Route path="/:id" exact component={CharacterMore} /> */}
+          <Route path="/users" exact component={UsersData} />
+          <Route
+            exact
+            path="/users/newuser"
+            component={() => (
+              <NewUser inputs={userInputs} title="Add New User" />
+            )}
+          />
+          <Route path="/users/:userId" exact component={SingleUser} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -6,7 +6,7 @@ const FeaturedChart = () => {
   return (
     <div className="featured-chart">
       <div className="top-featured-chart">
-        <h1 className="title-featured-chart">Total</h1>
+        <h1 className="title-featured-chart">סך הכול</h1>
         <MoreVertOutlinedIcon fontSize="small" />
       </div>
       <div className="bottom-featured-chart">
@@ -14,9 +14,9 @@ const FeaturedChart = () => {
           <div className="progress-chart">
             <CircularProgressbar value={70} text={"70%"} strokeWidth={1} />
           </div>
-          <p className="progress-title">Total Made Today</p>
+          <p className="progress-title">סך הכל היום</p>
           <p className="progress-amount">420</p>
-          <p className="progress-desc">Last payments not be included</p>
+          <p className="progress-desc">לא כולל תנועות אחרונות</p>
         </div>
       </div>
     </div>

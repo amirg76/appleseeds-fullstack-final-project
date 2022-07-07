@@ -3,7 +3,11 @@ import "./DashBoardNav.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import { myContext } from "../Context/mycontext";
+import { useContext } from "react";
+import { style } from "@mui/system";
 const DashBoardNav = () => {
+  const { dark, setDark } = useContext(myContext);
   return (
     <div className="dash-navbar">
       <div className="wrapper">
@@ -17,7 +21,7 @@ const DashBoardNav = () => {
             English
           </div>
           <div className="item">
-            <DarkModeOutlinedIcon />
+            <DarkModeOutlinedIcon onClick={() => setDark(!dark)} />
           </div>
         </div>
       </div>

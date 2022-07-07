@@ -2,36 +2,43 @@ import "./DashBoardSide.css";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
+import { Link } from "react-router-dom";
+import { myContext } from "../Context/mycontext";
+import { useContext } from "react";
 const DashBoardSide = () => {
+  const { dark, setDark } = useContext(myContext);
   return (
     <div className="main-side">
       <div className="top">
-        <img className="side-logo" src="/assets/img/logo.png" />
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <img className="side-logo" src="/assets/img/logo.png" />
+        </Link>
       </div>
       <hr />
       <div className="center">
         <ul>
-          <p className="title">Main</p>
+          <p className="title">ראשי</p>
           <li>
             <DashboardIcon className="icon" />
-            <span>Dashboard</span>
+            <span>לוח בקרה</span>
           </li>
           <li>
-            <PersonOutlineOutlinedIcon className="icon" />
-            <span>Users</span>
+            <Link to="/users" style={{ textDecoration: "none" }}>
+              <PersonOutlineOutlinedIcon className="icon" />
+              <span>משתמשים</span>
+            </Link>
           </li>
           <li>
-            <CardGiftcardOutlinedIcon className="icon" />
-            <span>Accounts</span>
-          </li>
-          <li>
-            <span>Orders</span>
+            <Link to="/accounts" style={{ textDecoration: "none" }}>
+              <CardGiftcardOutlinedIcon className="icon" />
+              <span>חשבונות</span>
+            </Link>
           </li>
         </ul>
       </div>
       <div className="bottom">
-        <div className="colorOptions"></div>
-        <div className="colorOptions"></div>
+        <div className="colorOptions" onClick={() => setDark(false)}></div>
+        <div className="colorOptions" onClick={() => setDark(true)}></div>
       </div>
     </div>
   );

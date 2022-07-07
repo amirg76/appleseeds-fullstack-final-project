@@ -8,26 +8,26 @@
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 }
-.left,
-.right {
+.widget-left,
+.widget-right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.left-title {
+.widget-left-title {
   font-weight: bold;
   font-size: 1vw;
   color: rgb(160, 160, 160);
 }
-.left-counter {
+.widget-left-counter {
   font-weight: 300;
   font-size: 2vw;
 }
-.left-link {
+.widget-left-link {
   font-size: 1vw;
   border-bottom: 1px solid gray;
 }
-.percentage {
+.widget-percentage {
   display: flex;
   align-items: center;
   font-size: 1vw;
@@ -38,7 +38,7 @@
 .negative {
   color: red;
 }
-.personal-icon {
+.widget-personal-icon {
   font-size: 1.5vw;
   padding: 5px;
   border-radius: 5px;
