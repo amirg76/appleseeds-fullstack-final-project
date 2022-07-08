@@ -1,32 +1,61 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "id", headerName: "'מס", width: 70 },
+  { field: "personal_id", headerName: "תז", width: 70 },
   {
-    field: "user",
-    headerName: "User",
-    width: 230,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          <img className="cellImg" src={params.row.img} alt="avatar" />
-          {params.row.username}
-        </div>
-      );
-    },
+    field: "f_name",
+    headerName: "שם פרטי",
+    width: 150,
+    // renderCell: (params) => {
+    //   return (
+    //     <div className="cellWithImg">
+    //       <img className="cellImg" src={params.row.img} alt="avatar" />
+    //       {params.row.username}
+    //     </div>
+    //   );
+    // },
+  },
+  {
+    field: "l_name",
+    headerName: "שם משפחה",
+    width: 150,
+    // renderCell: (params) => {
+    //   return (
+    //     <div className="cellWithImg">
+    //       <img className="cellImg" src={params.row.img} alt="avatar" />
+    //       {params.row.username}
+    //     </div>
+    //   );
+    // },
   },
   {
     field: "email",
-    headerName: "Email",
+    headerName: "אימייל",
     width: 230,
   },
-
   {
-    field: "age",
-    headerName: "Age",
-    width: 100,
+    field: "cash",
+    headerName: "עובר ושב",
+    width: 150,
   },
   {
+    field: "credit",
+    headerName: "קרדיט",
+    width: 150,
+  },
+  {
+    field: "account",
+    headerName: "חשבונות",
+    width: 200,
+  },
+
+  // {
+  //   field: "age",
+  //   headerName: "Age",
+  //   width: 100,
+  // },
+  {
     field: "status",
-    headerName: "Status",
+    headerName: "סטטוס",
     width: 160,
     renderCell: (params) => {
       return (
@@ -38,6 +67,25 @@ export const userColumns = [
   },
 ];
 
+export const accountColumns = [
+  { field: "id", headerName: "'מס", width: 70 },
+  { field: "accountNum", headerName: "מס חשבון", width: 150 },
+  {
+    field: "cash",
+    headerName: "עובר ושב",
+    width: 150,
+  },
+  {
+    field: "credit",
+    headerName: "קרדיט",
+    width: 150,
+  },
+  {
+    field: "minusInterest",
+    headerName: "ריבית",
+    width: 230,
+  },
+];
 //temporary data
 export const userRows = [
   {

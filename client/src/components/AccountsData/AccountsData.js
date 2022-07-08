@@ -1,19 +1,19 @@
-import "./UsersData.css";
+import "./AccountsData.css";
 import DashBoardSide from "../DashBoardSide/DashBoardSide";
 import DashBoardNav from "../DashBoardNav/DashBoardNav";
 import DataTable from "../DataTable/DataTable";
 
-const UsersData = () => {
+const AccountsData = () => {
   return (
-    <div className="userdata-main">
+    <div className="accounts-data-main">
       <DashBoardSide />
-      <div className="userdata-container">
+      <div className="accounts-data-container">
         <DashBoardNav />
 
-        <DataTable type="users" />
+        <DataTable type="accounts" />
       </div>
     </div>
   );
 };
 
-export default UsersData;
+export default AccountsData;

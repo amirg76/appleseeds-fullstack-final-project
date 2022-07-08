@@ -14,9 +14,10 @@ app.use(express.static(path.join(__dirname, "client/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
 });
+
 const PORT = process.env.PORT || 5000;
 // connect to server
-app.listen(process.env.PORT, (error) => {
+app.listen(PORT, (error) => {
   if (error) console.error("Error: ", error);
   console.log("SERVER IS UP AND RUNNING ON PORT ", PORT);
 });

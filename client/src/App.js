@@ -6,6 +6,7 @@ import MainPage from "./components/MainPage/MainPage";
 import MainBoard from "./components/MainBoard/MainBoard";
 import UsersData from "./components/UsersData/UsersData";
 import SingleUser from "./components/SingleUser/SingleUser";
+import AccountsData from "./components/AccountsData/AccountsData";
 import NewUser from "./components/NewUser/NewUser";
 import { productInputs, userInputs } from "./formSource";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" exact component={MainPage} />
           <Route path="/a" exact component={MainBoard} />
           <Route path="/users" exact component={UsersData} />
+          <Route path="/accounts" exact component={AccountsData} />
           <Route
             exact
             path="/users/newuser"
@@ -29,7 +31,7 @@ function App() {
               <NewUser inputs={userInputs} title="Add New User" />
             )}
           />
-          <Route path="/users/:userId" exact component={SingleUser} />
+          <Route path="/users/id/:userId" exact component={SingleUser} />
         </Switch>
       </BrowserRouter>
     </div>
