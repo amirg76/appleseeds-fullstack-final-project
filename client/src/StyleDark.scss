@@ -9,7 +9,8 @@
   /* .datatable {
   background-color: #111;
 } */
-  .css-r11z79-MuiDataGrid-root {
+  .MuiDataGrid-main {
+    //  .css-r11z79-MuiDataGrid-root {
     color: #fff !important;
   }
 
@@ -71,23 +72,23 @@
         }
       }
     }
-  }
+  }*/
 
-  .datatable {
-    .datagrid {
-      color: gray;
-      border: none;
+  // .datatable {
+  //   .datagrid {
+  //     color: gray;
+  //     border: none;
 
-      .viewButton,
-      .deleteButton,
-      .cellWithStatus {
-        color: gray;
-        border: none;
-      }
-    }
-  }
+  //     .viewButton,
+  //     .deleteButton,
+  //     .cellWithStatus {
+  //       color: gray;
+  //       border: none;
+  //     }
+  //   }
+  // }
 
-  input{
+  /*input{
       background-color: transparent;
   }
 } */
