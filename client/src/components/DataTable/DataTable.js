@@ -6,18 +6,17 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const DataTable = ({ type }) => {
-  // const [data, setData] = useState(userRows);
   const [data, setUserData] = useState([]);
+  // const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const rowToShow = type === "users" ? userColumns : accountColumns;
+  const url_link_get_all =
+    type === "users" ? "/users/get-all-users" : "/accounts/get-all-accounts";
+  const url_link_delete_id =
+    type === "users" ? "/users/delete-user" : "/accounts/delete-account";
   useEffect(() => {
     const fetchUserRows = async () => {
-      const url_link =
-        type === "users"
-          ? "/users/get-all-users"
-          : "/accounts/get-all-accounts";
-
       try {
-        const { data } = await API.get(url_link);
+        const { data } = await API.get(url_link_get_all);
         console.log(data);
         setUserData(data);
       } catch (error) {
@@ -26,8 +25,28 @@ const DataTable = ({ type }) => {
     };
     fetchUserRows();
   }, []);
-  const handleDelete = (id) => {
-    // setData(data.filter((item) => item.id !== id));
+  const handleDelete = async (id) => {
+    const filterData = data.filter((item) =>
+      type === "users" ? item.personal_id === id : item.accountNum === id
+    );
+    console.log(filterData);
+    const options = {
+      ...filterData,
+    };
+    try {
+      const { data } = await API.delete(
+        url_link_delete_id,
+        type === "users"
+          ? {
+              params: { personal_id: filterData[0].personal_id },
+            }
+          : { params: { accountNum: filterData[0].accountNum } }
+      );
+
+      setUserData(data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const actionColumn = [
@@ -47,7 +66,13 @@ const DataTable = ({ type }) => {
             )}
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() =>
+                handleDelete(
+                  type === "users"
+                    ? params.row.personal_id
+                    : params.row.accountNum
+                )
+              }
             >
               מחק
             </div>
@@ -60,16 +85,16 @@ const DataTable = ({ type }) => {
     <div className="datatable">
       {type === "users" ? (
         <div className="datatableTitle">
-          Add New User
+          הוסף משתמש חדש
           <Link to="/users/newuser" className="link">
-            Add New
+            הוסף חדש
           </Link>
         </div>
       ) : (
         <div className="datatableTitle">
-          Add New Account
-          <Link to="/users/newAccount" className="link">
-            Add New
+          הוסף חשבון חדש
+          <Link to="/accounts/new-account" className="link">
+            הוסף חדש
           </Link>
         </div>
       )}
@@ -80,6 +105,11 @@ const DataTable = ({ type }) => {
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
+        getRowId={
+          type === "users"
+            ? (data) => data.personal_id
+            : (data) => data.accountNum
+        }
       />
     </div>
   );

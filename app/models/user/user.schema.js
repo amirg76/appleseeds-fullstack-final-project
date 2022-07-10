@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const userSchema = new mongoose.Schema({
-  id: { type: Number },
-  personal_id: { type: Number, require: true },
-  f_name: { type: String },
-  l_name: { type: String },
+  // id: { type: Number },
+  personal_id: { type: Number, require: true, unique: true },
+  f_name: { type: String, require: true },
+  l_name: { type: String, require: true },
   cash: { type: Number, default: 0, require: true },
   credit: { type: Number, default: 0, require: true },
   account: [{ type: Number, require: true }],

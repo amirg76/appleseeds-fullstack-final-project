@@ -11,11 +11,14 @@ userSchema.statics.removeAllUsers = function () {
 userSchema.statics.findUserById = function (userId) {
   return this.findOne({ personal_id: userId });
 };
+userSchema.statics.deleteUserById = function (userId) {
+  return this.findOneAndDelete({ personal_id: userId });
+};
 
 userSchema.statics.createAllTogther = function () {
   const users = [
     {
-      id: 1,
+      // id: 1,
       personal_id: 1234,
       f_name: "בני",
       l_name: "ברמן",
@@ -25,7 +28,7 @@ userSchema.statics.createAllTogther = function () {
       email: "aaa@bbb.com",
     },
     {
-      id: 2,
+      // id: 2,
       personal_id: 1235,
       f_name: "אלי",
       l_name: "הורביץ",
@@ -35,7 +38,7 @@ userSchema.statics.createAllTogther = function () {
       email: "bbb@ccc.com",
     },
     {
-      id: 3,
+      // id: 3,
       personal_id: 1236,
       f_name: "משה",
       l_name: "פרץ",
@@ -45,7 +48,7 @@ userSchema.statics.createAllTogther = function () {
       email: "ddd@eee.com",
     },
     {
-      id: 4,
+      // id: 4,
       personal_id: 1237,
       f_name: "שי",
       l_name: "ברקוביץ",
@@ -55,7 +58,7 @@ userSchema.statics.createAllTogther = function () {
       email: "mmm@ggg.com",
     },
     {
-      id: 5,
+      // id: 5,
       personal_id: 1238,
       f_name: "מני",
       l_name: "פאר",
@@ -65,7 +68,7 @@ userSchema.statics.createAllTogther = function () {
       email: "abc@ggg.com",
     },
     {
-      id: 6,
+      // id: 6,
       personal_id: 1239,
       f_name: "מוטי",
       l_name: "ארואסטי",

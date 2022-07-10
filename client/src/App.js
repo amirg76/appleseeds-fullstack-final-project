@@ -7,8 +7,8 @@ import MainBoard from "./components/MainBoard/MainBoard";
 import UsersData from "./components/UsersData/UsersData";
 import SingleUser from "./components/SingleUser/SingleUser";
 import AccountsData from "./components/AccountsData/AccountsData";
-import NewUser from "./components/NewUser/NewUser";
-import { productInputs, userInputs } from "./formSource";
+import NewForm from "./components/NewForm/NewForm";
+import { accountsInputs, userInputs } from "./formSource";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useContext } from "react";
 import { myContext } from "./components/Context/mycontext";
@@ -23,15 +23,31 @@ function App() {
           <Route path="/" exact component={MainPage} />
           <Route path="/a" exact component={MainBoard} />
           <Route path="/users" exact component={UsersData} />
-          <Route path="/accounts" exact component={AccountsData} />
           <Route
             exact
             path="/users/newuser"
             component={() => (
-              <NewUser inputs={userInputs} title="Add New User" />
+              <NewForm
+                inputs={userInputs}
+                title="הוסף משתמש חדש"
+                type="users"
+              />
             )}
           />
           <Route path="/users/id/:userId" exact component={SingleUser} />
+
+          <Route path="/accounts" exact component={AccountsData} />
+          <Route
+            exact
+            path="/accounts/new-account"
+            component={() => (
+              <NewForm
+                inputs={accountsInputs}
+                title="הוסף חשבון חדש"
+                type="accounts"
+              />
+            )}
+          />
         </Switch>
       </BrowserRouter>
     </div>

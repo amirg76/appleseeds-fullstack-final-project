@@ -36,7 +36,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 35px;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 .new-formInput {
   width: 40%;

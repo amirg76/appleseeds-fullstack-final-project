@@ -1,5 +1,5 @@
 export const userColumns = [
-  { field: "id", headerName: "'מס", width: 70 },
+  // { field: "id", headerName: "'מס", width: 70 },
   { field: "personal_id", headerName: "תז", width: 70 },
   {
     field: "f_name",
@@ -18,14 +18,14 @@ export const userColumns = [
     field: "l_name",
     headerName: "שם משפחה",
     width: 150,
-    // renderCell: (params) => {
-    //   return (
-    //     <div className="cellWithImg">
-    //       <img className="cellImg" src={params.row.img} alt="avatar" />
-    //       {params.row.username}
-    //     </div>
-    //   );
-    // },
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={params.row.img} alt="avatar" />
+          {params.row.username}
+        </div>
+      );
+    },
   },
   {
     field: "email",
@@ -68,7 +68,7 @@ export const userColumns = [
 ];
 
 export const accountColumns = [
-  { field: "id", headerName: "'מס", width: 70 },
+  // { field: "id", headerName: "'מס", width: 70 },
   { field: "accountNum", headerName: "מס חשבון", width: 150 },
   {
     field: "cash",

@@ -9,6 +9,10 @@ accountSchema.statics.findAllAcc = function () {
 accountSchema.statics.findAccById = function (accnum) {
   return this.findOne({ accountNum: accnum });
 };
+accountSchema.statics.deleteAccByNum = function (accnum) {
+  return this.findOneAndDelete({ accountNum: accnum });
+};
+
 accountSchema.statics.createAllAccTogther = function () {
   const accounts = [
     {
