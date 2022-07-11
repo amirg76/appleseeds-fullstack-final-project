@@ -34,7 +34,7 @@ function App() {
               />
             )}
           />
-          <Route path="/users/id/:userId" exact component={SingleUser} />
+          <Route path="/accounts/id/:Id" exact component={SingleUser} />
 
           <Route path="/accounts" exact component={AccountsData} />
           <Route

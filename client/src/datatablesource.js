@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export const userColumns = [
   // { field: "id", headerName: "'מס", width: 70 },
   { field: "personal_id", headerName: "תז", width: 70 },
@@ -5,6 +6,15 @@ export const userColumns = [
     field: "f_name",
     headerName: "שם פרטי",
     width: 150,
+    editable: true,
+    // renderCell: (params) => {
+    //   return (
+    //     <div className="cellWithImg">
+    //       <input></input>
+    //       {params.row.f_name}
+    //     </div>
+    //   );
+    // },
     // renderCell: (params) => {
     //   return (
     //     <div className="cellWithImg">
@@ -18,19 +28,21 @@ export const userColumns = [
     field: "l_name",
     headerName: "שם משפחה",
     width: 150,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          <img className="cellImg" src={params.row.img} alt="avatar" />
-          {params.row.username}
-        </div>
-      );
-    },
+    editable: true,
+    // renderCell: (params) => {
+    //   return (
+    //     <div className="cellWithImg">
+    //       <img className="cellImg" src={params.row.img} alt="avatar" />
+    //       {params.row.username}
+    //     </div>
+    //   );
+    // },
   },
   {
     field: "email",
     headerName: "אימייל",
     width: 230,
+    editable: true,
   },
   {
     field: "cash",
@@ -46,6 +58,17 @@ export const userColumns = [
     field: "account",
     headerName: "חשבונות",
     width: 200,
+    editable: true,
+
+    renderCell: (params) => {
+      return params.row.account.map((account) => {
+        return (
+          <Link key={account} to={"/accounts/id/" + account}>
+            {account},
+          </Link>
+        );
+      });
+    },
   },
 
   // {
@@ -74,19 +97,23 @@ export const accountColumns = [
     field: "cash",
     headerName: "עובר ושב",
     width: 150,
+    editable: true,
   },
   {
     field: "credit",
     headerName: "קרדיט",
     width: 150,
+    editable: true,
   },
   {
     field: "minusInterest",
     headerName: "ריבית",
     width: 230,
+    editable: true,
   },
 ];
 //temporary data
+
 export const userRows = [
   {
     id: 1,

@@ -5,6 +5,7 @@ import {
   getAccById,
   createNewAcc,
   deleteByAcc,
+  updateAccTable,
 } from "../services/account.services.js";
 export const createAccAll = async (req, res) => {
   try {
@@ -62,11 +63,26 @@ export const deleteAccount = async (req, res) => {
 
     console.log(accountNum);
     await deleteByAcc(accountNum);
-    const savedUsers = await getAllAcc();
+    const savedAccounts = await getAllAcc();
 
     // res.send("delete");
-    res.send(savedUsers);
+    res.send(savedAccounts);
   } catch (error) {
     res.send(error.message);
+  }
+};
+export const updateTable = async (req, res) => {
+  try {
+    const account = req.body;
+
+    const savedAccounts = await updateAccTable(account);
+    // console.log(savedAccounts);
+    // if (_.isEqual(currentUsers, savedUsers)) throw new Error(405);
+    // const token = await generateToken(savedUsers);
+    // res.send(savedAccounts);
+  } catch (error) {
+    console.log(error.message);
+    if (error.message.includes("E11000")) res.send("11000");
+    else res.send(error.message);
   }
 };

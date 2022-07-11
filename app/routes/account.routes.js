@@ -6,6 +6,7 @@ import {
   getByAccId,
   createAccount,
   deleteAccount,
+  updateTable,
 } from "../controllers/account.controllers.js";
 const accountRouter = Router();
 
@@ -15,5 +16,6 @@ accountRouter.get("/get-all-accounts", getAllAccounts);
 accountRouter.post("/get-acc-by-id", getByAccId);
 accountRouter.post("/create-account", createAccount);
 accountRouter.delete("/delete-account", deleteAccount);
+accountRouter.put("/update-table", updateTable);
 
 export { accountRouter };

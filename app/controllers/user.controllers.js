@@ -5,6 +5,8 @@ import {
   deleteUsers,
   createNewUser,
   deleteById,
+  updateUserTable,
+  getUserByAcc,
 } from "../services/user.services.js";
 
 export const getAll = async (req, res) => {
@@ -55,13 +57,36 @@ export const createUser = async (req, res) => {
     else res.send(error.message);
   }
 };
+
 export const deleteUser = async (req, res) => {
   try {
-    const userId = req.query.personal_id;
-
-    await deleteById(userId);
+    await deleteById(req.query);
     const savedUsers = await getAllUsers();
+    res.send(savedUsers);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+export const updateTable = async (req, res) => {
+  try {
+    const users = req.body;
+    // const currentUsers = await getAllUsers();
+    const savedUsers = await updateUserTable(users);
+    // if (_.isEqual(currentUsers, savedUsers)) throw new Error(405);
+    // const token = await generateToken(savedUsers);
+    // res.send("user create" + savedUsers);
+  } catch (error) {
+    console.log(error.message);
+    if (error.message.includes("E11000")) res.send("11000");
+    else res.send(error.message);
+  }
+};
 
+export const getByAcc = async (req, res) => {
+  try {
+    const accountNum = req.body.accountNum;
+    console.log(accountNum);
+    const savedUsers = await getUserByAcc(accountNum);
     res.send(savedUsers);
   } catch (error) {
     res.send(error.message);

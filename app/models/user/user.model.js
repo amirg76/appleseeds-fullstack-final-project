@@ -11,10 +11,22 @@ userSchema.statics.removeAllUsers = function () {
 userSchema.statics.findUserById = function (userId) {
   return this.findOne({ personal_id: userId });
 };
-userSchema.statics.deleteUserById = function (userId) {
+userSchema.statics.deleteUserById = async function (userId) {
   return this.findOneAndDelete({ personal_id: userId });
 };
+userSchema.statics.updateUserDetalis = function (users) {
+  return this.findOneAndUpdate(
+    { personal_id: users.personal_id },
+    { ...users }
+  );
+};
 
+// userSchema.pre("remove", async function (next) {
+//   console.log(this.account);
+
+//   await Account.find({ accountNum: { $in: this.account } }).remove(); // 'this' is the client being removed. Provide
+//   next();
+// });
 userSchema.statics.createAllTogther = function () {
   const users = [
     {

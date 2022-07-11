@@ -7,6 +7,8 @@ import {
   getById,
   createUser,
   deleteUser,
+  updateTable,
+  getByAcc,
 } from "../controllers/user.controllers.js";
 const userRouter = Router();
 userRouter.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +17,8 @@ userRouter.get("/get-all-users", getAll);
 userRouter.get("/create-all-users", createAll);
 userRouter.delete("/delete-all-users", deleteAllUsers);
 userRouter.post("/get-by-id", getById);
+userRouter.post("/get-by-acc", getByAcc);
 userRouter.post("/create-user", createUser);
 userRouter.delete("/delete-user", deleteUser);
+userRouter.put("/update-table", updateTable);
 export { userRouter };

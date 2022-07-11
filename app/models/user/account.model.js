@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { resolve } from "path";
 import { accountSchema } from "./account.schema.js";
 accountSchema.statics.removeAllAcc = function () {
   return this.deleteMany();
@@ -11,6 +12,13 @@ accountSchema.statics.findAccById = function (accnum) {
 };
 accountSchema.statics.deleteAccByNum = function (accnum) {
   return this.findOneAndDelete({ accountNum: accnum });
+};
+accountSchema.statics.updateAccDetalis = function (account) {
+  return this.findOneAndUpdate(
+    { _id: account._id },
+    { $set: { ...account } },
+    { new: true }
+  );
 };
 
 accountSchema.statics.createAllAccTogther = function () {

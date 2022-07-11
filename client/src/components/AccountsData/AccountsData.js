@@ -1,7 +1,7 @@
 import "./AccountsData.css";
 import DashBoardSide from "../DashBoardSide/DashBoardSide";
 import DashBoardNav from "../DashBoardNav/DashBoardNav";
-import DataTable from "../DataTable/DataTable";
+import AccountTable from "../AccountTable/AccountTable";
 
 const AccountsData = () => {
   return (
@@ -10,7 +10,7 @@ const AccountsData = () => {
       <div className="accounts-data-container">
         <DashBoardNav />
 
-        <DataTable type="accounts" />
+        <AccountTable />
       </div>
     </div>
   );

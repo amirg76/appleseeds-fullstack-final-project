@@ -1,4 +1,5 @@
 import { Account } from "../models/user/account.model.js";
+import { User } from "../models/user/user.model.js";
 export const createAllAccounts = async () => {
   return await Account.createAllAccTogther();
 };
@@ -17,5 +18,15 @@ export const createNewAcc = async (account) => {
   return await newAcc.save();
 };
 export const deleteByAcc = async (accountNum) => {
+  // await User.find({ account: { $in: [accountNum] } }).remove();
+  await User.findOneAndUpdate(
+    {
+      account: { $in: [accountNum] },
+    },
+    { $pull: { account: accountNum } }
+  );
   return await Account.deleteAccByNum(accountNum);
+};
+export const updateAccTable = async (account) => {
+  return await Account.updateAccDetalis(account);
 };
