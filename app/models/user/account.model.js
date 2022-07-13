@@ -78,6 +78,15 @@ accountSchema.statics.createAllAccTogther = function () {
       cash: 0,
       credit: 0,
       minusInterest: 1.1,
+      tracking_Mov: [
+        {
+          tracking_Id: 1111,
+          action: "העברה",
+          amount: 50,
+          transfer_acc: 5241,
+          status: "פלוס",
+        },
+      ],
     },
   ];
 

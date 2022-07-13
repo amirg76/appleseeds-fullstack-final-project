@@ -74,3 +74,21 @@
 .colorOptions:nth-child(2) {
   background-color: #333;
 }
+.editButton {
+  top: 0;
+  right: 1vw;
+}
+.addButton {
+  top: 6vh;
+  right: 1vw;
+}
+.infoButton {
+  position: absolute;
+  padding: 0.5vw;
+  font-size: 1vw;
+  color: #7451f8;
+  background-color: #7551f818;
+  cursor: pointer;
+  color: #888;
+  border-radius: 0px 0px 0px 5px;
+}

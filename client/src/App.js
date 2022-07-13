@@ -34,7 +34,8 @@ function App() {
               />
             )}
           />
-          <Route path="/accounts/id/:Id" exact component={SingleUser} />
+          {/* <Route path="/accounts/id/:Id" exact component={SingleUser} /> */}
+          <Route path="/users/login/" exact component={SingleUser} />
 
           <Route path="/accounts" exact component={AccountsData} />
           <Route

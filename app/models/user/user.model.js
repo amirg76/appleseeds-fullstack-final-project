@@ -38,6 +38,9 @@ userSchema.statics.createAllTogther = function () {
       credit: 0,
       account: [1002],
       email: "aaa@bbb.com",
+      phone: 66662887,
+      address: "בן יהודה 5",
+      city: "ירושלים",
     },
     {
       // id: 2,
@@ -48,6 +51,9 @@ userSchema.statics.createAllTogther = function () {
       credit: 0,
       account: [1003],
       email: "bbb@ccc.com",
+      phone: 68962887,
+      address: "בוגרושוב 65",
+      city: "תל-אביב",
     },
     {
       // id: 3,
@@ -58,6 +64,9 @@ userSchema.statics.createAllTogther = function () {
       credit: 0,
       account: [10202],
       email: "ddd@eee.com",
+      phone: 23662887,
+      address: "ארלוזורוב 9",
+      city: "פתח-תקווה",
     },
     {
       // id: 4,
@@ -68,6 +77,9 @@ userSchema.statics.createAllTogther = function () {
       credit: 0,
       account: [5241, 5968],
       email: "mmm@ggg.com",
+      phone: 51962987,
+      address: "שמעוני 14",
+      city: "חדרה",
     },
     {
       // id: 5,
@@ -78,6 +90,9 @@ userSchema.statics.createAllTogther = function () {
       credit: 0,
       account: [5713, 9966],
       email: "abc@ggg.com",
+      phone: 82412369,
+      address: "אלי כהן 44",
+      city: "חולון",
     },
     {
       // id: 6,
@@ -88,6 +103,9 @@ userSchema.statics.createAllTogther = function () {
       credit: 0,
       account: [1056],
       email: "fff@ggg.com",
+      phone: 32198758,
+      address: "הרב קוק 55",
+      city: "בני ברק",
     },
   ];
 

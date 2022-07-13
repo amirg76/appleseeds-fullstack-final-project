@@ -40,6 +40,33 @@ const DashBoardSide = () => {
         <div className="colorOptions" onClick={() => setDark(false)}></div>
         <div className="colorOptions" onClick={() => setDark(true)}></div>
       </div>
+      <div className="center">
+        {/* <ul>
+          <p className="title">פעולות</p>
+          <li>
+            <Link to="/users" style={{ textDecoration: "none" }}>
+              <PersonOutlineOutlinedIcon className="icon" />
+              <span>ערוך משתמשים</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/accounts/new-account-by-id"
+              style={{ textDecoration: "none" }}
+            >
+              <CardGiftcardOutlinedIcon className="icon" />
+              <span>הוסף חשבון למשתמש</span>
+            </Link>
+          </li>
+        </ul> */}
+        {/*  */}
+        {/* <Link to="/users" style={{ textDecoration: "none" }}>
+          <div className="infoButton editButton">ערוך</div>
+        </Link>
+        <Link to="/accounts/new-account" style={{ textDecoration: "none" }}>
+          <div className="infoButton addButton">הוסף חשבון חדש</div>
+        </Link> */}
+      </div>
     </div>
   );
 };

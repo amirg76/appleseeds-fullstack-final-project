@@ -21,6 +21,27 @@ export const userInputs = [
     placeholder: "john_doe",
   },
   {
+    name: "phone",
+    id: 3,
+    label: "טלפון",
+    type: "number",
+    placeholder: "+1 234 567 89",
+  },
+  {
+    name: "address",
+    id: 3,
+    label: "כתובת",
+    type: "text",
+    placeholder: "כתובת",
+  },
+  {
+    name: "city",
+    id: 3,
+    label: "עיר",
+    type: "text",
+    placeholder: "עיר",
+  },
+  {
     name: "cash",
     id: 4,
     label: "עובר ושב",

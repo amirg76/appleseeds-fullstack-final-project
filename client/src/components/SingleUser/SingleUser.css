@@ -18,11 +18,17 @@
   position: relative;
 }
 .editButton {
-  position: absolute;
   top: 0;
-  right: 0;
-  padding: 5px;
-  font-size: 12px;
+  right: 1vw;
+}
+.addButton {
+  top: 6vh;
+  right: 1vw;
+}
+.infoButton {
+  position: absolute;
+  padding: 0.5vw;
+  font-size: 1vw;
   color: #7451f8;
   background-color: #7551f818;
   cursor: pointer;

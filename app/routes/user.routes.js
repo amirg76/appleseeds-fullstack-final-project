@@ -9,6 +9,7 @@ import {
   deleteUser,
   updateTable,
   getByAcc,
+  userLogin,
 } from "../controllers/user.controllers.js";
 const userRouter = Router();
 userRouter.use(bodyParser.urlencoded({ extended: true }));
@@ -21,4 +22,5 @@ userRouter.post("/get-by-acc", getByAcc);
 userRouter.post("/create-user", createUser);
 userRouter.delete("/delete-user", deleteUser);
 userRouter.put("/update-table", updateTable);
+userRouter.post("/login", userLogin);
 export { userRouter };

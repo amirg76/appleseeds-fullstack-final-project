@@ -5,7 +5,7 @@ export const userColumns = [
   {
     field: "f_name",
     headerName: "שם פרטי",
-    width: 150,
+    width: 100,
     editable: true,
     // renderCell: (params) => {
     //   return (
@@ -27,7 +27,7 @@ export const userColumns = [
   {
     field: "l_name",
     headerName: "שם משפחה",
-    width: 150,
+    width: 100,
     editable: true,
     // renderCell: (params) => {
     //   return (
@@ -39,20 +39,38 @@ export const userColumns = [
     // },
   },
   {
+    field: "phone",
+    headerName: "טלפון",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: "address",
+    headerName: "כתובת",
+    width: 100,
+    editable: true,
+  },
+  {
+    field: "city",
+    headerName: "עיר",
+    width: 100,
+    editable: true,
+  },
+  {
     field: "email",
     headerName: "אימייל",
-    width: 230,
+    width: 150,
     editable: true,
   },
   {
     field: "cash",
     headerName: "עובר ושב",
-    width: 150,
+    width: 100,
   },
   {
     field: "credit",
     headerName: "קרדיט",
-    width: 150,
+    width: 100,
   },
   {
     field: "account",

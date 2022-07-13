@@ -1,4 +1,5 @@
 import "./SingleUser.css";
+
 import { useState, useEffect } from "react";
 import { API } from "../../Api/BankApi";
 import DashBoardSide from "../DashBoardSide/DashBoardSide";
@@ -6,14 +7,16 @@ import DashBoardNav from "../DashBoardNav/DashBoardNav";
 
 import AccountChart from "../AccountChart/AccountChart";
 import Movements from "../Movements/Movements";
+import { Link } from "react-router-dom";
 const SingleUser = (props) => {
   const [data, setData] = useState([]);
-  const [account, setAccount] = useState([]);
+  const [account, setAccount] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchAccount = async () => {
       const accountNum = props.match.params.Id;
-      console.log(accountNum);
+      setIsLoading(true);
       try {
         const { data } = await API.post("/accounts/get-acc-by-id", {
           accountNum: accountNum,
@@ -21,6 +24,7 @@ const SingleUser = (props) => {
         setAccount(data);
         console.log(data);
         await fetchUser();
+        setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
@@ -42,14 +46,29 @@ const SingleUser = (props) => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <div className="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  ) : (
     <div className="single">
       <DashBoardSide />
       <div className="singleContainer">
         <DashBoardNav />
         <div className="top">
           <div className="left">
-            <div className="editButton">ערוך</div>
+            <Link to="/users" style={{ textDecoration: "none" }}>
+              <div className=" infoButton editButton">ערוך</div>
+            </Link>
+            <Link
+              to="/accounts/new-account/:id"
+              style={{ textDecoration: "none" }}
+            >
+              <div className="infoButton addButton">הוסף חשבון חדש</div>
+            </Link>
             <h1 className="title">מידע</h1>
             <div className="item">
               {/* <img
@@ -58,7 +77,10 @@ const SingleUser = (props) => {
                 className="itemImg"
               /> */}
               <div className="details">
-                {console.log(data.f_name)}
+                <h1 className="itemTitle">
+                  <span> מס חשבון </span>
+                  <span>{account.accountNum}</span>
+                </h1>
                 <h1 className="itemTitle">
                   <span> {data.f_name} </span>
                   <span>{data.l_name}</span>
@@ -68,18 +90,16 @@ const SingleUser = (props) => {
                   <span className="itemValue">{data.email}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Phone:</span>
-                  <span className="itemValue">+1 2345 67 89</span>
+                  <div className="itemKey">טלפון:</div>
+                  <span className="itemValue">{data.phone}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Address:</span>
-                  <span className="itemValue">
-                    Elton St. 234 Garden Yd. NewYork
-                  </span>
+                  <div className="itemKey">כתובת</div>
+                  <span className="itemValue">{data.address}</span>
                 </div>
                 <div className="detailItem">
-                  <span className="itemKey">Country:</span>
-                  <span className="itemValue">USA</span>
+                  <div className="itemKey">עיר:</div>
+                  <span className="itemValue">{data.city}</span>
                 </div>
               </div>
             </div>
@@ -92,8 +112,10 @@ const SingleUser = (props) => {
           </div>
         </div>
         <div className="bottom">
+          {console.log(account)}
           <h1 className="title">Last Transactions</h1>
-          <Movements />
+
+          {account && <Movements accountMov={account} />}
         </div>
       </div>
     </div>

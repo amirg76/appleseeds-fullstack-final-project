@@ -92,3 +92,19 @@ export const getByAcc = async (req, res) => {
     res.send(error.message);
   }
 };
+
+export const userLogin = async (req, res) => {
+  try {
+    const { password, email } = req.body;
+    console.log(password + " " + email);
+    let errors = [];
+    if (!email || !password) {
+      errors.push({ msg: "Plesae fill in all fields" });
+    }
+
+    // const savedUsers = await getUserByAcc(accountNum);
+    // res.send(savedUsers);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
