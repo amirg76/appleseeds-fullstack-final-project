@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
 import "./LoginForm.css";
 import { API } from "../../Api/BankApi";
 
@@ -48,7 +49,7 @@ const LoginForm = ({ openLogin, closeAll }) => {
     console.log(newLogin);
     try {
       const postedLogin = await API.post("users/login", newLogin);
-
+      console.log(postedLogin);
       // const postedData = await axios.post(
       //   "https://628e6124368687f3e71608eb.mockapi.io//breaking-bad",
       //   newReview

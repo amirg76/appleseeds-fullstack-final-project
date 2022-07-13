@@ -103,7 +103,7 @@ export const userLogin = async (req, res) => {
     }
 
     // const savedUsers = await getUserByAcc(accountNum);
-    // res.send(savedUsers);
+    res.send("sucsses");
   } catch (error) {
     res.send(error.message);
   }
