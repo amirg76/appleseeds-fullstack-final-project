@@ -7,6 +7,8 @@ import {
   deleteById,
   updateUserTable,
   getUserByAcc,
+  loginChk,
+  generateToken,
 } from "../services/user.services.js";
 
 export const getAll = async (req, res) => {
@@ -20,6 +22,9 @@ export const getAll = async (req, res) => {
 export const createAll = async (req, res) => {
   try {
     const savedUsers = await createAllUsers();
+    savedUsers.map(async (user) => {
+      const token = await generateToken(user);
+    });
     res.send(" Succesfully created ! New data: " + savedUsers);
   } catch (error) {
     res.send(error.message);
@@ -96,14 +101,16 @@ export const getByAcc = async (req, res) => {
 export const userLogin = async (req, res) => {
   try {
     const { password, email } = req.body;
-    console.log(password + " " + email);
-    let errors = [];
-    if (!email || !password) {
-      errors.push({ msg: "Plesae fill in all fields" });
-    }
+    const userReq = req.body;
+    console.log(userReq);
 
-    // const savedUsers = await getUserByAcc(accountNum);
-    res.send("sucsses");
+    const data = await loginChk(userReq);
+    const token = await generateToken(data);
+
+    // const publicPro = await getPublicProfile(savedUser);
+    // console.log(publicPro);
+
+    res.send({ data, token });
   } catch (error) {
     res.send(error.message);
   }

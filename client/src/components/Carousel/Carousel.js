@@ -93,7 +93,6 @@ const Carousel = () => {
               <img className="photo-carousel" src={photo.url} />
               <div className="img-area">
                 <div className="img-text-area">
-                  {console.log(photo.title)}
                   <span>{photo.title}</span>
                 </div>
               </div>

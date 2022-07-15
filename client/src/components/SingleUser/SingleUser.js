@@ -7,38 +7,76 @@ import DashBoardNav from "../DashBoardNav/DashBoardNav";
 
 import AccountChart from "../AccountChart/AccountChart";
 import Movements from "../Movements/Movements";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 const SingleUser = (props) => {
   const [data, setData] = useState([]);
   const [account, setAccount] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
-    const fetchAccount = async () => {
+    if (!localStorage.getItem("token")) {
+      <Redirect to="/" />;
+    }
+  }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
       const accountNum = props.match.params.Id;
-      setIsLoading(true);
+      console.log(accountNum);
       try {
-        const { data } = await API.post("/accounts/get-acc-by-id", {
-          accountNum: accountNum,
-        });
-        setAccount(data);
+        const { data } = await API.post(
+          "/users/get-by-acc",
+          {
+            accountNum: accountNum,
+          },
+          {
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQwMTM4MzBkNDA3ODIzNWJiNTExZDgiLCJpYXQiOjE2NTc4MDM2NTJ9.PnOY09NMVWiD60mzLYQ5uUnxZIlBtKY_gL0OtNZT4bg",
+            },
+          }
+        );
+        setData(data[0]);
         console.log(data);
-        await fetchUser();
+        await fetchAccount(accountNum);
         setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
     };
-    fetchAccount();
+
+    fetchUser();
   }, []);
 
-  const fetchUser = async () => {
-    const accountNum = props.match.params.Id;
+  const fetchAccount = async () => {
+    const accountNum = props.match.params.id;
     console.log(accountNum);
+    setIsLoading(true);
     try {
-      const { data } = await API.post("/users/get-by-acc", {
+      const { data } = await API.post("/accounts/get-acc-by-id", {
         accountNum: accountNum,
       });
+      setAccount(data);
+      console.log(data);
+      await fetchUser(accountNum);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const fetchUser = async (accountNum) => {
+    // const accountNum = props.match.params.Id;
+    console.log(accountNum);
+    try {
+      const { data } = await API.post(
+        "/users/get-by-acc",
+        {
+          accountNum: accountNum,
+        },
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ8.eyJfaWQiOiI2MmQwMTM4MzBkNDA3ODIzNWJiNTExZDgiLCJpYXQiOjE2NTc4MDM2NTJ9.PnOY09NMVWiD60mzLYQ5uUnxZIlBtKY_gL0OtNZT4bg",
+          },
+        }
+      );
       setData(data[0]);
       console.log(data);
     } catch (error) {

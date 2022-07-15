@@ -17,7 +17,6 @@ const Header = () => {
     setNavToggle(!navToggle);
   };
   const showLogin = () => {
-    console.log(login);
     setLogin(true);
   };
 

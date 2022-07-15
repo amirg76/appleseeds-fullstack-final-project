@@ -71,6 +71,15 @@ accountSchema.statics.createAllAccTogther = function () {
       cash: 0,
       credit: 0,
       minusInterest: 1.3,
+      tracking_Mov: [
+        {
+          tracking_Id: 2222,
+          action: "משיכה",
+          amount: 500,
+          transfer_acc: 9999,
+          status: "מינוס",
+        },
+      ],
     },
     {
       id: 8,

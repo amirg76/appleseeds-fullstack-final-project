@@ -1,5 +1,6 @@
 import { Router } from "express";
 import bodyParser from "body-parser";
+import { auth } from "../middleware/auth.js";
 import {
   getAll,
   createAll,

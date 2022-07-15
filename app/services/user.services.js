@@ -30,6 +30,12 @@ export const getUserByAcc = async (accountNum) => {
     account: { $in: [accountNum] },
   });
 };
+export const loginChk = async (userReq) => {
+  return await User.findByCredentials(userReq);
+};
+export const generateToken = async (user) => {
+  return await user.generateAuthToken();
+};
 // (async () => {
 //   const user = await User.findOne({});
 //   console.log(user._id);

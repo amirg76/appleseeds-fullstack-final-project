@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
       }
     },
   },
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 // { "id": 1238, "cash": 0, "credit": 0, "account": [5713, 9966] }

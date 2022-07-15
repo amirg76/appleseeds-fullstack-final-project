@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import ReactDOM from "react-dom";
+import { myContext } from "../Context/mycontext.js";
 import { Link, Redirect } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 import "./LoginForm.css";
 import { API } from "../../Api/BankApi";
 
 const LoginForm = ({ openLogin, closeAll }) => {
   // React States
+  const [userData, setUserData] = useState([]);
+  const [error, setError] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const { login, setLogin } = useContext(myContext);
+  const [isLogin, setIsLogin] = useState(false);
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
@@ -32,6 +38,40 @@ const LoginForm = ({ openLogin, closeAll }) => {
     uname: "invalid username",
     pass: "invalid password",
   };
+
+  const fetchUser = async (newLogin) => {
+    try {
+      // const { data } = await API.post("users/login", newLogin, {
+      //   headers: {
+      //     Authorization:
+      //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQwMTM4MzBkNDA3ODIzNWJiNTExZDgiLCJpYXQiOjE2NTc4MDM2NTJ9.PnOY09NMVWiD60mzLYQ5uUnxZIlBtKY_gL0OtNZT4bg",
+      //   },
+      // });
+      const { data } = await API.post("users/login", newLogin);
+      console.log(data.token);
+      console.log(data);
+      localStorage.setItem("token", data.token);
+      setUserData(data.data);
+      // setIsOpen(true);
+      if (data.token !== undefined) setIsSubmitted(true);
+      else if (data.includes("user")) {
+        setError(true);
+        setErrorMessages({ name: "uname", message: errors.uname });
+        renderErrorMessage("uname");
+      } else if (data.includes("password")) {
+        setError(true);
+        setErrorMessages({ name: "pass", message: errors.pass });
+        renderErrorMessage("password");
+      }
+      // <Redirect to="/me" />;
+      // hist.push("/accounts/id/5241");
+
+      console.log(isSubmitted);
+    } catch (e) {
+      console.log(e.message);
+      // setError(e.response.data);
+    }
+  };
   const handleInputChange = ({ target }) => {
     console.log(target.value);
     const { name, value } = target;
@@ -41,58 +81,68 @@ const LoginForm = ({ openLogin, closeAll }) => {
   const handleSubmit = async (event) => {
     //Prevent page reload
     event.preventDefault();
-    console.log("yes");
     const newLogin = {
       email: inputValues.email,
       password: inputValues.password,
     };
     console.log(newLogin);
-    try {
-      const postedLogin = await API.post("users/login", newLogin);
-      console.log(postedLogin);
-      // const postedData = await axios.post(
-      //   "https://628e6124368687f3e71608eb.mockapi.io//breaking-bad",
-      //   newReview
-      // );
-
-      // setReviewsData((prev) => {
-      //   return [...prev, postedData.data];
-      //   // return [postedData.data, ...prev];
-      // });
-      // setInputValues({
-      //   newUserName: "",
-      //   newTitle: "",
-      //   newContent: "",
-      // });
-      // setIsLoading(false);
-      // setIsSuccessPost(true);
-    } catch (e) {
-      console.log(e.message);
-    }
-    const { uname, pass } = document.forms[0];
-
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
+    await fetchUser(newLogin);
+    // const { uname, pass } = document.forms[0];
     // Compare user info
+
     // if (userData) {
-    //   if (userData.password !== pass.value) {
+    //   if (userData.password !== inputValues.password) {
     //     // Invalid password
     //     setErrorMessages({ name: "pass", message: errors.pass });
+    //     setIsSubmitted(false);
     //   } else {
     //     setIsSubmitted(true);
     //   }
     // } else {
     //   // Username not found
     //   setErrorMessages({ name: "uname", message: errors.uname });
+    //   setIsSubmitted(false);
     // }
-  };
 
+    // };
+    // try {
+    //   const { data } = await API.post("users/login", newLogin);
+    //   console.log(data);
+    //   if (data === "sucsses") console.log(data);
+    //   {
+    //     setIsSubmitted(true);
+    //   }
+    //   console.log(isSubmitted);
+
+    //   // const postedData = await axios.post(
+    //   //   "https://628e6124368687f3e71608eb.mockapi.io//breaking-bad",
+    //   //   newReview
+    //   // );
+
+    //   // setReviewsData((prev) => {
+    //   //   return [...prev, postedData.data];
+    //   //   // return [postedData.data, ...prev];
+    //   // });
+    //   // setInputValues({
+    //   //   newUserName: "",
+    //   //   newTitle: "",
+    //   //   newContent: "",
+    //   // });
+    //   // setIsLoading(false);
+    //   // setIsSuccessPost(true);
+    // } catch (e) {
+    //   console.log(e.message);
+    // }
+    //
+
+    // Find user login info
+    // const userData = database.find((user) => user.username === uname.value);
+  };
   // Generate JSX code for error message
-  const renderErrorMessage = (name) => name;
-  // name === errorMessages.name && (
-  //   <div className="error">{errorMessages.message}</div>
-  // );
+  const renderErrorMessage = (name) =>
+    name === errorMessages.name && (
+      <div className="error">{errorMessages.message}</div>
+    );
   const closeForm = () => {
     setIsOpen(false);
     openLogin(false);
@@ -113,6 +163,9 @@ const LoginForm = ({ openLogin, closeAll }) => {
             // required
             className="login-form-input"
           />
+          {error && errorMessages.name === "uname" && (
+            <div style={{ color: "red" }}>{errorMessages.message}</div>
+          )}
           {/* {renderErrorMessage("uname")} */}
         </div>
         <div className="input-container">
@@ -125,6 +178,9 @@ const LoginForm = ({ openLogin, closeAll }) => {
             // required
             className="login-form-input"
           />
+          {error && errorMessages.name === "pass" && (
+            <div style={{ color: "red" }}>{errorMessages.message}</div>
+          )}
           {/* {renderErrorMessage("pass")} */}
         </div>
         {/* <Link to="/users/login"> */}
@@ -138,7 +194,7 @@ const LoginForm = ({ openLogin, closeAll }) => {
 
   return (
     <>
-      {isOpen && (
+      {login && (
         <div className="form-app">
           <div className="login-form">
             <button onClick={closeForm} className="form-close">
@@ -148,7 +204,12 @@ const LoginForm = ({ openLogin, closeAll }) => {
             <img className="login-pic" src="/assets/img/logo.png" />
             <div className="title">כניסה לחשבון שלי</div>
             {isSubmitted ? (
-              <div>User is successfully logged in</div>
+              // <div>hi</div>
+              <>
+                <div>User is successfully logged in</div>
+                {console.log("submit")}
+                {/* <Redirect to="/me" /> */}
+              </>
             ) : (
               renderForm
             )}

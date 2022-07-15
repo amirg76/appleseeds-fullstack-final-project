@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { userSchema } from "./user.schema.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 userSchema.statics.findAllUsers = function () {
   return this.find({});
@@ -20,6 +22,45 @@ userSchema.statics.updateUserDetalis = function (users) {
     { ...users }
   );
 };
+userSchema.statics.findByCredentials = async function (userReq) {
+  const email = userReq.email;
+  const password = userReq.password;
+
+  const user = await this.findOne({ email: email });
+
+  if (!user) {
+    throw new Error("user not found");
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    throw new Error("password not found");
+  }
+
+  return user;
+};
+// generate auth token
+userSchema.methods.generateAuthToken = async function () {
+  const user = this;
+  const token = jwt.sign({ _id: user._id.toString() }, "thisismytoken");
+  user.tokens = user.tokens.concat({ token });
+  // console.log(user.tokens);
+  user.save();
+  return token;
+};
+// hash passwords
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password") || user.isNew) {
+    user.password = await bcrypt.hash(user.password, 8);
+    // this.password = hash;
+  }
+  // if (this.isNew) {
+  //   this.meta.createdAt = this.meta.updatedAt = Date.now()
+  //  }
+
+  // console.log("jusr before saving");
+  next();
+});
 
 // userSchema.pre("remove", async function (next) {
 //   console.log(this.account);
@@ -32,6 +73,7 @@ userSchema.statics.createAllTogther = function () {
     {
       // id: 1,
       personal_id: 1234,
+      password: "password",
       f_name: "בני",
       l_name: "ברמן",
       cash: 0,
@@ -45,6 +87,7 @@ userSchema.statics.createAllTogther = function () {
     {
       // id: 2,
       personal_id: 1235,
+      password: "password",
       f_name: "אלי",
       l_name: "הורביץ",
       cash: 0,
@@ -58,6 +101,7 @@ userSchema.statics.createAllTogther = function () {
     {
       // id: 3,
       personal_id: 1236,
+      password: "password",
       f_name: "משה",
       l_name: "פרץ",
       cash: 0,
@@ -71,6 +115,7 @@ userSchema.statics.createAllTogther = function () {
     {
       // id: 4,
       personal_id: 1237,
+      password: "password",
       f_name: "שי",
       l_name: "ברקוביץ",
       cash: 0,
@@ -84,6 +129,7 @@ userSchema.statics.createAllTogther = function () {
     {
       // id: 5,
       personal_id: 1238,
+      password: "password",
       f_name: "מני",
       l_name: "פאר",
       cash: 0,
@@ -97,6 +143,7 @@ userSchema.statics.createAllTogther = function () {
     {
       // id: 6,
       personal_id: 1239,
+      password: "password",
       f_name: "מוטי",
       l_name: "ארואסטי",
       cash: 0,
