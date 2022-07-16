@@ -22,6 +22,14 @@ userSchema.statics.updateUserDetalis = function (users) {
     { ...users }
   );
 };
+userSchema.methods.getPublicPro = async function () {
+  const user = this;
+  const userObject = user.toObject();
+  delete userObject.password;
+  delete userObject.tokens;
+
+  return userObject;
+};
 userSchema.statics.findByCredentials = async function (userReq) {
   const email = userReq.email;
   const password = userReq.password;

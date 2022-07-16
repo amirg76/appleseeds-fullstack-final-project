@@ -9,13 +9,16 @@ import { useState } from "react";
 
 const NewForm = ({ inputs, title, type }) => {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-  const [typeOfPopup, setTypeOfPopup] = useState("");
   const [file, setFile] = useState("");
   const [unique, setUnique] = useState(true);
   const [inputValues, setInputValues] = useState({
     email: "",
+    password: "password",
     l_name: "",
     f_name: "",
+    phone: "",
+    address: "",
+    city: "",
     cash: "",
     credit: "",
     account: "",
@@ -43,18 +46,17 @@ const NewForm = ({ inputs, title, type }) => {
     setIsPopUpOpen((prev) => ({ isPopUpOpen: !prev.isPopUpOpen }));
   };
   const handleConfirmCreate = () => {
-    setTypeOfPopup("create");
     togglePopup();
   };
+  //handle inputs
   const handleInputChange = ({ target }) => {
     console.log(target.value);
     const { name, value } = target;
     type === "users"
       ? setInputValues({ ...inputValues, [name]: value })
       : setInputAcc({ ...inputAcc, [name]: value });
-
-    // setIsLoading(false);
   };
+  //submit form
   const submitForm = async (e) => {
     e.preventDefault();
     let options = "";
@@ -63,10 +65,7 @@ const NewForm = ({ inputs, title, type }) => {
       : (options = { ...inputAcc });
     try {
       const result = await axios.post(url, options);
-
-      console.log(result.data);
       if (result.data === 11000 || result.data.includes("required")) {
-        console.log("not uniqe");
         setUnique(false);
       } else setUnique(true);
     } catch (error) {
@@ -83,19 +82,8 @@ const NewForm = ({ inputs, title, type }) => {
           <h1>{title}</h1>
         </div>
         <div className="new-bottom">
-          <div className="new-left">
-            {/* <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            /> */}
-          </div>
           <div className="new-right">
             <form className="new-form" onSubmit={submitForm}>
-              {/* <form className="new-form" method="POST" action={url}> */}
               <div className="new-formInput">
                 <label htmlFor="file">
                   Image: <DriveFolderUploadOutlinedIcon className="new-icon" />

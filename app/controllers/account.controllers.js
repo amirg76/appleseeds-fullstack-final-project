@@ -33,7 +33,6 @@ export const getAllAccounts = async (req, res) => {
 };
 export const getByAccId = async (req, res) => {
   try {
-    console.log("get acc by num");
     const accountNum = req.body.accountNum;
     console.log(accountNum);
     const savedAccounts = await getAccById(accountNum);

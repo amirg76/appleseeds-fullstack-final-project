@@ -12,7 +12,11 @@ const UsersTable = ({ type }) => {
     const fetchUserRows = async () => {
       try {
         const { data } = await API.get("/users/get-all-users");
-        setData(data);
+        const filterUser = data.filter((user) => {
+          return user.email !== "admin@admin.com";
+        });
+
+        setData(filterUser);
       } catch (error) {
         console.log(error.message);
       }

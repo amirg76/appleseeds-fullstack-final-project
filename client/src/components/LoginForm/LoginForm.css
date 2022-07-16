@@ -80,3 +80,6 @@ input[type="submit"]:hover {
   border: none;
   background-color: #fff;
 }
+.logout-item {
+  cursor: pointer;
+}

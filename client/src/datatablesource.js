@@ -81,7 +81,7 @@ export const userColumns = [
     renderCell: (params) => {
       return params.row.account.map((account) => {
         return (
-          <Link key={account} to={"/accounts/id/" + account}>
+          <Link key={account} to={"/accounts/account/" + account}>
             {account},
           </Link>
         );
@@ -107,6 +107,10 @@ export const userColumns = [
     },
   },
 ];
+
+const handleAccountClick = (account) => {
+  localStorage.setItem("account", account);
+};
 
 export const accountColumns = [
   // { field: "id", headerName: "'מס", width: 70 },

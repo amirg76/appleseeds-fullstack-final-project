@@ -1,66 +1,71 @@
-import "./SingleUser.css";
+import "./SingleAccount.css";
 
 import { useState, useEffect } from "react";
 import { API } from "../../Api/BankApi";
+import DashBoardSide from "../DashBoardSide/DashBoardSide";
 import DashBoardNav from "../DashBoardNav/DashBoardNav";
 import AccountChart from "../AccountChart/AccountChart";
 import Movements from "../Movements/Movements";
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
-const SingleUser = (props) => {
+
+const SingleAccount = (props) => {
   const [data, setData] = useState([]);
-  const [AccountIndex, setAccountIndex] = useState(0);
-  const [accounts, setAccounts] = useState(false);
+
+  const [account, setAccount] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isToken, setIsToken] = useState(true);
 
   useEffect(() => {
+    const query = props.match.params.id;
     if (!localStorage.getItem("token")) {
-      setIsToken(!isToken);
+      setIsToken(false);
     } else {
       const token = localStorage.getItem("token");
-      const query = localStorage.getItem("data");
-      fetchUser(query, token);
+      fetchAdmin(token);
     }
+    fetchAccount(query);
   }, []);
-
-  const fetchAccount = async (accounts) => {
-    const accountsArr = accounts.map((account) => {
-      return API.post("/accounts/get-acc-by-id", {
-        accountNum: account,
-      });
-    });
-    try {
-      const accountsObj = await axios.all(accountsArr);
-      const accountArr = accountsObj.map((obj) => obj.data);
-      setAccounts(accountArr);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const fetchUser = async (query, token) => {
-    console.log(query);
+  // auth admin
+  const fetchAdmin = async (token) => {
     setIsLoading(true);
     try {
-      const { data } = await API.get("/users/getme", {
+      await API.get("/users/getme", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setData(data);
-      await fetchAccount(data.account);
       setIsLoading(false);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const handleChangeAccount = ({ target }) => {
-    const newAccount = Number(target.innerText);
-    const newAccountIndex = accounts.findIndex((account) => {
-      return newAccount === account.accountNum ? true : false;
-    });
-    setAccountIndex(newAccountIndex);
+  const fetchAccount = async (account) => {
+    setIsLoading(true);
+    try {
+      const { data } = await API.post("/accounts/get-acc-by-id", {
+        accountNum: account,
+      });
+      setAccount(data);
+      await fetchUser(data.accountNum);
+    } catch (error) {
+      console.log(error.message);
+    }
+    setIsLoading(false);
   };
+
+  const fetchUser = async (query) => {
+    console.log(query);
+    setIsLoading(true);
+    try {
+      const { data } = await API.post("/users/get-by-acc", {
+        accountNum: query,
+      });
+      setData(data[0]);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return !isToken ? (
     <>
       <Redirect to="/" />
@@ -73,10 +78,10 @@ const SingleUser = (props) => {
       <div></div>
     </div>
   ) : (
-    accounts &&
+    account &&
     data && (
       <div className="single">
-        {/* <DashBoardSide /> */}
+        <DashBoardSide />
         <div className="singleContainer">
           <DashBoardNav />
           <div className="top">
@@ -91,7 +96,7 @@ const SingleUser = (props) => {
                 <div className="infoButton addButton">הוסף חשבון חדש</div>
               </Link>
 
-              <div className="infoButton changeAccount">
+              {/* <div className="infoButton changeAccount">
                 <button className="dropbtn">החלף חשבון</button>
                 <div className="dropdown-content">
                   {accounts.map((account) => {
@@ -107,15 +112,26 @@ const SingleUser = (props) => {
                     );
                   })}
                 </div>
-              </div>
+              </div> */}
 
+              {/* <div class=" infoButton changeAccount">
+              <span>החלף חשבון</span>
+              <div class="dropdown-content">
+                <p>Hello World!</p>
+              </div>
+            </div> */}
               <h1 className="title">מידע</h1>
               <div className="item">
+                {/* <img
+                  src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                  alt=""
+                  className="itemImg"
+                /> */}
                 <div className="details">
                   <h1 className="itemTitle">
                     <span> מס חשבון </span>
-                    {console.log(accounts)}
-                    <span>{accounts[AccountIndex].accountNum}</span>
+
+                    <span>{account.accountNum}</span>
                   </h1>
                   <h1 className="itemTitle">
                     <span> {data.f_name} </span>
@@ -148,11 +164,10 @@ const SingleUser = (props) => {
             </div>
           </div>
           <div className="bottom">
-            {console.log(accounts[AccountIndex])}
             <h1 className="title">Last Transactions</h1>
 
-            {accounts[AccountIndex].tracking_Mov !== undefined ? (
-              <Movements accountMov={accounts[AccountIndex]} />
+            {account.tracking_Mov !== undefined ? (
+              <Movements accountMov={account} />
             ) : (
               <Movements accountMov={[]} />
             )}
@@ -163,4 +178,4 @@ const SingleUser = (props) => {
   );
 };
 
-export default SingleUser;
+export default SingleAccount;

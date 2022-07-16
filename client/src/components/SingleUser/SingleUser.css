@@ -14,15 +14,20 @@
   flex: 1;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-  padding: 20px;
+  padding: 9vh;
   position: relative;
+  margin-left: 1vw;
 }
 .editButton {
   top: 0;
   right: 1vw;
 }
 .addButton {
-  top: 6vh;
+  top: 8vh;
+  right: 1vw;
+}
+.changeAccount {
+  top: 16vh;
   right: 1vw;
 }
 .infoButton {
@@ -79,4 +84,47 @@
   font-size: 1.2vw;
   color: lightgray;
   margin-bottom: 20px;
+}
+.dropbtn {
+  /* background-color: #4caf50; */
+  /* color: white; */
+  color: #7451f8;
+  /* padding: 16px; */
+  padding: 0.5vw;
+  font-size: 1vw;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+
+  /* background-color: #f9f9f9; */
+  min-width: 5vw;
+  /* top: 10vh; */
+  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+  z-index: 1;
+}
+
+.change-account-link {
+  /* .dropdown-content a { */
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.8vw;
+  background-color: #7551f818;
+}
+
+.change-account-link:hover {
+  /* .dropdown-content a:hover { */
+  background-color: #7a7786;
+}
+
+.changeAccount:hover .dropdown-content {
+  display: block;
+}
+.changeAccount:hover .dropbtn {
+  background-color: #7551f818;
+  /* background-color: #3e8e41; */
 }

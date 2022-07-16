@@ -72,7 +72,7 @@ const Movements = ({ accountMov }) => {
   useEffect(() => {
     SetAccountData(accountMov);
     console.log(accountMov);
-  }, []);
+  }, [accountMov]);
   const dateWithoutTime = (date) => {
     return moment(date).format("DD/MM/YYYY");
   };

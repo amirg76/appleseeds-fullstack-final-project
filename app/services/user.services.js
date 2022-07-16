@@ -15,7 +15,6 @@ export const getUserById = async (personal_id) => {
 };
 export const createNewUser = async (user) => {
   const newUser = new User(user);
-
   return await newUser.save();
 };
 export const deleteById = async (req) => {
@@ -35,6 +34,12 @@ export const loginChk = async (userReq) => {
 };
 export const generateToken = async (user) => {
   return await user.generateAuthToken();
+};
+export const saveRemoveToken = async (token) => {
+  return await token.save();
+};
+export const getPublicProfile = async (user) => {
+  return await user.getPublicPro();
 };
 // (async () => {
 //   const user = await User.findOne({});

@@ -6,6 +6,7 @@ import MainPage from "./components/MainPage/MainPage";
 import MainBoard from "./components/MainBoard/MainBoard";
 import UsersData from "./components/UsersData/UsersData";
 import SingleUser from "./components/SingleUser/SingleUser";
+import SingleAccount from "./components/SingleAccount/SingleAccount";
 import AccountsData from "./components/AccountsData/AccountsData";
 import NewForm from "./components/NewForm/NewForm";
 import { accountsInputs, userInputs } from "./formSource";
@@ -34,8 +35,8 @@ function App() {
               />
             )}
           />
-          {/* <Route path="/accounts/id/:Id" exact component={SingleUser} /> */}
-          <Route path="/accounts/id/:id" exact component={SingleUser} />
+          <Route path="/users/login" exact component={SingleUser} />
+          <Route path="/accounts/account/:id" exact component={SingleAccount} />
 
           <Route path="/accounts" exact component={AccountsData} />
           <Route
