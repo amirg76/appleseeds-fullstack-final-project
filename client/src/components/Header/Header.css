@@ -36,16 +36,6 @@ nav ul li a {
   font-size: 1.5vw;
   font-family: "Times New Roman", Times, serif;
 }
-/* nav ul li a::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 0%;
-  height: 5%;
-  top: -10px;
-  background-color: #fff;
-  transition: ease-in-out 0.25s;
-} */
 
 nav ul li a::before {
   content: "";

@@ -82,13 +82,13 @@ const SingleUser = (props) => {
           <div className="top">
             <div className="left">
               <Link to="/users" style={{ textDecoration: "none" }}>
-                <div className=" infoButton editButton">ערוך</div>
+                <div className=" infoButton editButton">העברה</div>
               </Link>
               <Link
                 to="/accounts/new-account/:id"
                 style={{ textDecoration: "none" }}
               >
-                <div className="infoButton addButton">הוסף חשבון חדש</div>
+                <div className="infoButton addButton">משיכה</div>
               </Link>
 
               <div className="infoButton changeAccount">
@@ -149,7 +149,7 @@ const SingleUser = (props) => {
           </div>
           <div className="bottom">
             {console.log(accounts[AccountIndex])}
-            <h1 className="title">Last Transactions</h1>
+            <h1 className="title">העברות אחרונות</h1>
 
             {accounts[AccountIndex].tracking_Mov !== undefined ? (
               <Movements accountMov={accounts[AccountIndex]} />

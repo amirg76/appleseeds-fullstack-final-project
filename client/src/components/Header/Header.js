@@ -31,13 +31,18 @@ const Header = () => {
           </Link>
         </li>
         <li>
-          <Link to="/media" onClick={showLinks}>
+          <Link to="/market" onClick={showLinks}>
             מדדים
           </Link>
         </li>
         <li>
-          <Link to="/reviews" onClick={showLinks}>
+          <Link to="/articals" onClick={showLinks}>
             כתבות
+          </Link>
+        </li>
+        <li>
+          <Link to="/contect" onClick={showLinks}>
+            צור קשר
           </Link>
         </li>
         <li>

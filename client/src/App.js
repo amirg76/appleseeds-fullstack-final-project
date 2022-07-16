@@ -9,6 +9,7 @@ import SingleUser from "./components/SingleUser/SingleUser";
 import SingleAccount from "./components/SingleAccount/SingleAccount";
 import AccountsData from "./components/AccountsData/AccountsData";
 import NewForm from "./components/NewForm/NewForm";
+import ContectUs from "./components/ContectUs/ContectUs";
 import { accountsInputs, userInputs } from "./formSource";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useContext } from "react";
@@ -22,6 +23,7 @@ function App() {
       <BrowserRouter forceRefresh={true}>
         <Switch>
           <Route path="/" exact component={MainPage} />
+          <Route path="/contect" exact component={ContectUs} />
           <Route path="/a" exact component={MainBoard} />
           <Route path="/users" exact component={UsersData} />
           <Route

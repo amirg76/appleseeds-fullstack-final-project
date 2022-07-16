@@ -88,21 +88,11 @@ const Movements = ({ accountMov }) => {
             <TableCell className="tableCell">תאריך</TableCell>
             <TableCell className="tableCell">חשבון לתנועה</TableCell>
             <TableCell className="tableCell">סטאטוס</TableCell>
-            {/* <TableCell className="tableCell">Status</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
           {accountData.tracking_Mov.map((mov) => (
             <TableRow key={accountData.accountNum}>
-              {/* <TableCell className="tableCell">
-                {accountData.accountNum}
-              </TableCell> */}
-              {/* <TableCell className="tableCell">
-                <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
-                </div>
-              </TableCell> */}
               <TableCell className="tableCell">{mov.tracking_Id}</TableCell>
               <TableCell className="tableCell">{mov.action}</TableCell>
               <TableCell className="tableCell">{mov.amount}</TableCell>
