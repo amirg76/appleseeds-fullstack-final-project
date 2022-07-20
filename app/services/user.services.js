@@ -24,6 +24,46 @@ export const deleteById = async (req) => {
 export const updateUserTable = async (users) => {
   return await User.updateUserDetalis(users);
 };
+export const updateUserWithdrawal = async ({ userAccount, amount }) => {
+  const checkUserAccount = await Account.findOne({
+    accountNum: userAccount,
+  });
+  if (checkUserAccount) {
+    await Account.decreaseUserAccount(userAccount, amount);
+    return "sucsses";
+  } else {
+    return "user";
+  }
+};
+
+export const updateUserTransfer = async (transferObj) => {
+  const { userAccount, accountToTransfer, transferAmount } = transferObj;
+  const checkUserAccount = await Account.findOne({
+    accountNum: userAccount,
+  });
+  const checkTransferAccount = await Account.findOne({
+    accountNum: accountToTransfer,
+  });
+
+  if (checkUserAccount) {
+    if (checkTransferAccount) {
+      if (checkUserAccount.cash - transferAmount > -checkUserAccount.credit) {
+        await Account.decreaseUserAccount(userAccount, transferAmount);
+        await Account.increaseTransferAccount(
+          accountToTransfer,
+          transferAmount
+        );
+        return "sucsses";
+      } else {
+        return "credit";
+      }
+    } else {
+      return "transfer";
+    }
+  } else {
+    return "user";
+  }
+};
 export const getUserByAcc = async (accountNum) => {
   return await User.find({
     account: { $in: [accountNum] },

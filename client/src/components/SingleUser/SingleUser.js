@@ -19,10 +19,23 @@ const SingleUser = (props) => {
       setIsToken(!isToken);
     } else {
       const token = localStorage.getItem("token");
-      const query = localStorage.getItem("data");
-      fetchUser(query, token);
+      // const query = localStorage.getItem("data");
+      const fetchUser = async () => {
+        setIsLoading(true);
+        try {
+          const { data } = await API.get("/users/getme", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setData(data);
+          await fetchAccount(data.account);
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+      fetchUser();
     }
-  }, []);
+  }, [isToken]);
 
   const fetchAccount = async (accounts) => {
     const accountsArr = accounts.map((account) => {
@@ -39,21 +52,6 @@ const SingleUser = (props) => {
     }
   };
 
-  const fetchUser = async (query, token) => {
-    console.log(query);
-    setIsLoading(true);
-    try {
-      const { data } = await API.get("/users/getme", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setData(data);
-      await fetchAccount(data.account);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   const handleChangeAccount = ({ target }) => {
     const newAccount = Number(target.innerText);
     const newAccountIndex = accounts.findIndex((account) => {
@@ -61,6 +59,9 @@ const SingleUser = (props) => {
     });
     setAccountIndex(newAccountIndex);
   };
+
+  const handleTransfer = () => {};
+
   return !isToken ? (
     <>
       <Redirect to="/" />
@@ -81,17 +82,31 @@ const SingleUser = (props) => {
           <DashBoardNav />
           <div className="top">
             <div className="left">
-              <Link to="/users" style={{ textDecoration: "none" }}>
-                <div className=" infoButton editButton">העברה</div>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/users/new-transfer",
+                  state: { userAccount: accounts[AccountIndex].accountNum },
+                }}
+              >
+                <div
+                  className=" infoButton-single-user editButton"
+                  onClick={handleTransfer}
+                >
+                  העברה
+                </div>
               </Link>
               <Link
-                to="/accounts/new-account/:id"
                 style={{ textDecoration: "none" }}
+                to={{
+                  pathname: "/users/new-withdrawal",
+                  state: { userAccount: accounts[AccountIndex].accountNum },
+                }}
               >
-                <div className="infoButton addButton">משיכה</div>
+                <div className="infoButton-single-user addButton">משיכה</div>
               </Link>
 
-              <div className="infoButton changeAccount">
+              <div className="infoButton-single-user changeAccount">
                 <button className="dropbtn">החלף חשבון</button>
                 <div className="dropdown-content">
                   {accounts.map((account) => {

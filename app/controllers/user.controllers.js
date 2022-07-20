@@ -10,6 +10,8 @@ import {
   loginChk,
   generateToken,
   getPublicProfile,
+  updateUserTransfer,
+  updateUserWithdrawal,
 } from "../services/user.services.js";
 
 export const getAll = async (req, res) => {
@@ -79,6 +81,30 @@ export const updateTable = async (req, res) => {
   try {
     const users = req.body;
     await updateUserTable(users);
+  } catch (error) {
+    console.log(error.message);
+    if (error.message.includes("E11000")) res.send("11000");
+    else res.send(error.message);
+  }
+};
+export const updateTransfer = async (req, res) => {
+  try {
+    const transferObj = req.body;
+
+    const transfer = await updateUserTransfer(transferObj);
+    res.send(transfer);
+  } catch (error) {
+    console.log(error.message);
+    if (error.message.includes("E11000")) res.send("11000");
+    else res.send(error.message);
+  }
+};
+export const updateWithdrawal = async (req, res) => {
+  try {
+    const withdrawalObj = req.body;
+    // console.log(withdrawalObj);
+    const withdrawal = await updateUserWithdrawal(withdrawalObj);
+    res.send(withdrawal);
   } catch (error) {
     console.log(error.message);
     if (error.message.includes("E11000")) res.send("11000");

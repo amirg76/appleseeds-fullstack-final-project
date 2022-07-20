@@ -22,6 +22,7 @@ userSchema.statics.updateUserDetalis = function (users) {
     { ...users }
   );
 };
+
 userSchema.methods.getPublicPro = async function () {
   const user = this;
   const userObject = user.toObject();
@@ -161,6 +162,20 @@ userSchema.statics.createAllTogther = function () {
       phone: 32198758,
       address: "הרב קוק 55",
       city: "בני ברק",
+    },
+    {
+      id: 7,
+      personal_id: 9999,
+      password: "password",
+      f_name: "admin",
+      l_name: "admin",
+      cash: 0,
+      credit: 0,
+      account: [],
+      email: "admin@admin.com",
+      phone: 32198758,
+      address: "הרב ",
+      city: "בני",
     },
   ];
 

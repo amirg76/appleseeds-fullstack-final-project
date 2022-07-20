@@ -1,7 +1,5 @@
-import logo from "./logo.svg";
-
 import "./App.css";
-import Header from "./components/Header/Header.js";
+
 import MainPage from "./components/MainPage/MainPage";
 import MainBoard from "./components/MainBoard/MainBoard";
 import UsersData from "./components/UsersData/UsersData";
@@ -9,12 +7,19 @@ import SingleUser from "./components/SingleUser/SingleUser";
 import SingleAccount from "./components/SingleAccount/SingleAccount";
 import AccountsData from "./components/AccountsData/AccountsData";
 import NewForm from "./components/NewForm/NewForm";
+import NewUserAction from "./components/NewUserAction/NewUserAction";
 import ContectUs from "./components/ContectUs/ContectUs";
-import { accountsInputs, userInputs } from "./formSource";
+import {
+  accountsInputs,
+  userInputs,
+  transferInputs,
+  withdrawalInput,
+} from "./formSource";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useContext } from "react";
 import { myContext } from "./components/Context/mycontext";
 import "./StyleDark.scss";
+
 function App() {
   const { dark } = useContext(myContext);
   return (
@@ -37,6 +42,29 @@ function App() {
               />
             )}
           />
+          <Route
+            exact
+            path="/users/new-transfer"
+            component={() => (
+              <NewUserAction
+                inputs={transferInputs}
+                title="העברה ביו חשבונות"
+                type="transfer"
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/users/new-withdrawal"
+            component={() => (
+              <NewUserAction
+                inputs={withdrawalInput}
+                title="משיכת כספים"
+                type="withdrawal"
+              />
+            )}
+          />
+
           <Route path="/users/login" exact component={SingleUser} />
           <Route path="/accounts/account/:id" exact component={SingleAccount} />
 

@@ -99,3 +99,26 @@ export const accountsInputs = [
     // placeholder: "100",
   },
 ];
+
+export const transferInputs = [
+  {
+    id: 1,
+    name: "accountToTransfer",
+    label: "מס חשבון להעברה",
+    type: "number",
+  },
+  {
+    name: "transferAmount",
+    id: 2,
+    label: "סכום להעברה",
+    type: "number",
+  },
+];
+export const withdrawalInput = [
+  {
+    name: "amount",
+    id: 1,
+    label: "סכום להעברה",
+    type: "number",
+  },
+];

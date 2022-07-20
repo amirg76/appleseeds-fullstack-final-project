@@ -20,6 +20,25 @@ accountSchema.statics.updateAccDetalis = function (account) {
     { new: true }
   );
 };
+accountSchema.statics.decreaseUserAccount = function (
+  userAccount,
+  transferAmount
+) {
+  return this.findOneAndUpdate(
+    { accountNum: userAccount },
+    { $inc: { cash: -transferAmount } }
+  );
+};
+
+accountSchema.statics.increaseTransferAccount = function (
+  accountToTransfer,
+  transferAmount
+) {
+  return this.findOneAndUpdate(
+    { accountNum: accountToTransfer },
+    { $inc: { cash: transferAmount } }
+  );
+};
 
 accountSchema.statics.createAllAccTogther = function () {
   const accounts = [

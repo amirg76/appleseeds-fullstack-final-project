@@ -30,14 +30,23 @@
   top: 16vh;
   right: 1vw;
 }
-.infoButton {
+.infoButton-single-user {
   position: absolute;
   padding: 0.5vw;
   font-size: 1vw;
   color: #7451f8;
-  background-color: #7551f818;
+  background-color: #8979c318;
   cursor: pointer;
   border-radius: 0px 0px 0px 5px;
+  /*  */
+
+  /* background-color: #0a0a23; */
+  /* color: #fff; */
+  border: none;
+  border-radius: 10px;
+  /* padding: 15px;
+  min-height: 30px;
+  min-width: 120px; */
 }
 
 .item {
