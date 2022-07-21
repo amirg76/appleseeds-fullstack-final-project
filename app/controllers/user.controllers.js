@@ -102,7 +102,7 @@ export const updateTransfer = async (req, res) => {
 export const updateWithdrawal = async (req, res) => {
   try {
     const withdrawalObj = req.body;
-    // console.log(withdrawalObj);
+
     const withdrawal = await updateUserWithdrawal(withdrawalObj);
     res.send(withdrawal);
   } catch (error) {

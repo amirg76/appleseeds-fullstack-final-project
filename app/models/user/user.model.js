@@ -47,6 +47,7 @@ userSchema.statics.findByCredentials = async function (userReq) {
 
   return user;
 };
+
 // generate auth token
 userSchema.methods.generateAuthToken = async function () {
   const user = this;

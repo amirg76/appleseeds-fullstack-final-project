@@ -29,6 +29,37 @@ accountSchema.statics.decreaseUserAccount = function (
     { $inc: { cash: -transferAmount } }
   );
 };
+accountSchema.statics.pushToMovements = function (
+  userAccount,
+  transferAmount,
+  accountToTransfer = 9999
+) {
+  let typeOfAction = "משיכה";
+  if (accountToTransfer !== 9999) typeOfAction = "העברה";
+  const movementObj = {
+    action: typeOfAction,
+    amount: transferAmount,
+    transfer_acc: accountToTransfer,
+  };
+  return this.findOneAndUpdate(
+    { accountNum: userAccount },
+    {
+      $inc: { cash: -transferAmount },
+      $push: {
+        tracking_Mov: movementObj,
+      },
+    }
+  );
+};
+// tracking_Mov: [
+//   {
+//     tracking_Id: { type: Number },
+//     action: { type: String },
+//     amount: { type: Number },
+//     date: { type: Date, default: new Date() },
+//     transfer_acc: { type: Number },
+//     status: { type: String },
+//   },
 
 accountSchema.statics.increaseTransferAccount = function (
   accountToTransfer,

@@ -1,6 +1,6 @@
 import axios from "axios";
 import "./NewUserAction.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, Redirect } from "react-router-dom";
 
 import DashBoardNav from "../DashBoardNav/DashBoardNav";
 
@@ -8,12 +8,15 @@ import PopUpAction from "../PopUpAction/PopUpAction";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 import { useState, useEffect } from "react";
+import { API } from "../../Api/BankApi";
 
 const NewUserAction = ({ inputs, title, type }) => {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [error, setError] = useState(false);
   const [typeOfError, setTypeOfError] = useState("");
-  const [unique, setUnique] = useState(true);
+  // const [unique, setUnique] = useState(true);
+  const [isToken, setIsToken] = useState(true);
+  const [token, setToken] = useState("");
   const [withdrawalValues, setWithdrawalValues] = useState({
     amount: "",
     userAccount: "",
@@ -24,32 +27,47 @@ const NewUserAction = ({ inputs, title, type }) => {
     transferAmount: "",
   });
   const location = useLocation();
+
   useEffect(() => {
-    const userAcc = location.state.userAccount;
-    type === "transfer"
-      ? setTransferInput({ userAccount: userAcc })
-      : setWithdrawalValues({ userAccount: userAcc });
-    console.log(location.state.userAccount);
-  }, [location.state.userAccount, type]);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setIsToken(!isToken);
+    } else {
+      setToken(token);
+      if (location.state.userAccount) {
+        const userAcc = location.state.userAccount;
 
-  let url = "";
-  type === "transfer"
-    ? (url = "http://localhost:5000/users/new-transfer")
-    : (url = "http://localhost:5000/users/new-withdrawal");
-  console.log(process.env.NODE_ENV);
+        type === "transfer"
+          ? setTransferInput({ userAccount: userAcc })
+          : setWithdrawalValues({ userAccount: userAcc });
+      }
+      // console.log(location.state.userAccount);
+    }
+  }, [isToken, type]);
 
-  if (process.env.NODE_ENV === "production") {
+  const setUrl = () => {
+    let url = "";
     type === "transfer"
-      ? (url = "/users/new-transfer")
-      : (url = "/users/new-withdrawal");
-  }
+      ? (url = "http://localhost:5000/users/new-transfer")
+      : (url = "http://localhost:5000/users/new-withdrawal");
+    console.log(process.env.NODE_ENV);
+
+    if (process.env.NODE_ENV === "production") {
+      type === "transfer"
+        ? (url = "/users/new-transfer")
+        : (url = "/users/new-withdrawal");
+    }
+    return url;
+  };
 
   const togglePopup = () => {
     setIsPopUpOpen((prev) => ({ isPopUpOpen: !prev.isPopUpOpen }));
   };
-  const handleConfirmCreate = () => {
-    togglePopup();
-  };
+
+  // const handleConfirmCreate = () => {
+  //   togglePopup();
+  // };
+
   //handle inputs
   const handleInputChange = ({ target }) => {
     console.log(target.value);
@@ -62,26 +80,37 @@ const NewUserAction = ({ inputs, title, type }) => {
   const submitForm = async (e) => {
     e.preventDefault();
     let options = "";
+    let url = setUrl();
+
     type === "transfer"
       ? (options = { ...transferInput })
       : (options = { ...withdrawalValues });
     try {
       console.log(options);
+      console.log(url);
       const result = await axios.put(url, options);
-      console.log(result);
+      console.log(result.data);
       checkResult(result.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   const checkResult = (data) => {
-    if (data !== "sucsses") setError(!error);
+    if (data !== "sucsses") setError(true);
     if (data === "credit") setTypeOfError("אין מספיק קרדיט בחשבון");
     if (data === "transfer") setTypeOfError(" אין חשבון כזה במערכת");
     if (data === "user") setTypeOfError(" תקלה בקבלת מס חשבון המעביר");
-    if (data === "sucsses") togglePopup();
+    if (data === "sucsses") {
+      setError(false);
+      togglePopup();
+    }
   };
-  return (
+  return !isToken ? (
+    <>
+      <Redirect to="/" />
+    </>
+  ) : (
     <div className="new">
       <div className="newContainer-action">
         <DashBoardNav />
@@ -92,11 +121,14 @@ const NewUserAction = ({ inputs, title, type }) => {
           <div className="new-right">
             <form className="new-form-action" onSubmit={submitForm}>
               <div className="new-formInput-action">
-                {error && (
+                {console.log(error)}
+                {error ? (
                   <label htmlFor="file">
                     שגיאה: <ErrorOutlineIcon className="new-icon" />
                     {typeOfError}
                   </label>
+                ) : (
+                  ""
                 )}
                 {/* <input
                   className="new-input"
@@ -128,7 +160,8 @@ const NewUserAction = ({ inputs, title, type }) => {
                 <button
                   type="submit"
                   className="new-button-action"
-                  onClick={handleConfirmCreate}
+                  onClick={submitForm}
+                  // onClick={handleConfirmCreate}
                 >
                   שלח
                 </button>
@@ -144,7 +177,6 @@ const NewUserAction = ({ inputs, title, type }) => {
                 </Link>
               </div>
             </form>
-            {console.log(url)}
           </div>
         </div>
       </div>

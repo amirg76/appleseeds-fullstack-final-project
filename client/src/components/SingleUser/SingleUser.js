@@ -52,11 +52,16 @@ const SingleUser = (props) => {
     }
   };
 
-  const handleChangeAccount = ({ target }) => {
+  const handleChangeAccount = async ({ target }) => {
     const newAccount = Number(target.innerText);
     const newAccountIndex = accounts.findIndex((account) => {
       return newAccount === account.accountNum ? true : false;
     });
+    console.log(newAccount);
+    // const accountData = await API.post("/accounts/get-acc-by-id", {
+    //   accountNum: newAccount,
+    // });
+    // setAccounts(accountData);
     setAccountIndex(newAccountIndex);
   };
 

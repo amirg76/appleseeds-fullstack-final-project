@@ -118,7 +118,7 @@ export const withdrawalInput = [
   {
     name: "amount",
     id: 1,
-    label: "סכום להעברה",
+    label: "סכום למשיכה",
     type: "number",
   },
 ];

@@ -34,7 +34,7 @@ export const getAllAccounts = async (req, res) => {
 export const getByAccId = async (req, res) => {
   try {
     const accountNum = req.body.accountNum;
-    console.log(accountNum);
+
     const savedAccounts = await getAccById(accountNum);
     res.send(savedAccounts);
   } catch (error) {
