@@ -91,21 +91,25 @@ const Movements = ({ accountMov }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {accountData.tracking_Mov.map((mov) => (
-            <TableRow key={accountData.accountNum}>
-              <TableCell className="tableCell">{mov.tracking_Id}</TableCell>
-              <TableCell className="tableCell">{mov.action}</TableCell>
-              <TableCell className="tableCell">{mov.amount}</TableCell>
+          {accountData
+            ? accountData.tracking_Mov.map((mov) => (
+                <TableRow key={mov.tracking_Id}>
+                  <TableCell className="tableCell">{mov.tracking_Id}</TableCell>
+                  <TableCell className="tableCell">{mov.action}</TableCell>
+                  <TableCell className="tableCell">{mov.amount}</TableCell>
 
-              <TableCell className="tableCell">
-                {dateWithoutTime(mov.date)}
-              </TableCell>
-              <TableCell className="tableCell">{mov.transfer_acc}</TableCell>
-              <TableCell className="tableCell">
-                <span className={`status ${mov.status}`}>{mov.status}</span>
-              </TableCell>
-            </TableRow>
-          ))}
+                  <TableCell className="tableCell">
+                    {dateWithoutTime(mov.date)}
+                  </TableCell>
+                  <TableCell className="tableCell">
+                    {mov.transfer_acc}
+                  </TableCell>
+                  <TableCell className="tableCell">
+                    <span className={`status ${mov.status}`}>{mov.status}</span>
+                  </TableCell>
+                </TableRow>
+              ))
+            : ""}
         </TableBody>
       </Table>
     </TableContainer>

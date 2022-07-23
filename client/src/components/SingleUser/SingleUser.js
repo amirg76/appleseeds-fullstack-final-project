@@ -58,10 +58,12 @@ const SingleUser = (props) => {
       return newAccount === account.accountNum ? true : false;
     });
     console.log(newAccount);
+
     // const accountData = await API.post("/accounts/get-acc-by-id", {
     //   accountNum: newAccount,
     // });
-    // setAccounts(accountData);
+    // console.log(accountData.data);
+    // setAccounts(accountData.data);
     setAccountIndex(newAccountIndex);
   };
 
@@ -141,6 +143,10 @@ const SingleUser = (props) => {
                     <span> {data.f_name} </span>
                     <span>{data.l_name}</span>
                   </h1>
+                  <h1 className="itemTitle">
+                    <span> סה"כ: </span>
+                    <span>{accounts[AccountIndex].cash} ש"ח</span>
+                  </h1>
                   <div className="detailItem">
                     <span className="itemKey">אימייל:</span>
                     <span className="itemValue">{data.email}</span>
@@ -166,6 +172,7 @@ const SingleUser = (props) => {
                 title="User Spending ( Last 6 Months)"
               />
             </div>
+            {console.log(accounts[AccountIndex].tracking_Mov)}
           </div>
           <div className="bottom">
             {console.log(accounts[AccountIndex])}
@@ -174,7 +181,7 @@ const SingleUser = (props) => {
             {accounts[AccountIndex].tracking_Mov !== undefined ? (
               <Movements accountMov={accounts[AccountIndex]} />
             ) : (
-              <Movements accountMov={[]} />
+              <Movements accountMov={false} />
             )}
           </div>
         </div>

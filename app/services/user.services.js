@@ -30,7 +30,8 @@ export const updateUserWithdrawal = async ({ userAccount, amount }) => {
   });
   if (checkUserAccount) {
     await Account.decreaseUserAccount(userAccount, amount);
-    await Account.pushToMovements(userAccount, amount);
+    await Account.pushToUserMovements(userAccount, amount);
+
     return "sucsses";
   } else {
     return "user";
@@ -53,6 +54,16 @@ export const updateUserTransfer = async (transferObj) => {
         await Account.increaseTransferAccount(
           accountToTransfer,
           transferAmount
+        );
+        await Account.pushToUserMovements(
+          userAccount,
+          transferAmount,
+          accountToTransfer
+        );
+        await Account.pushToTransferMovements(
+          userAccount,
+          transferAmount,
+          accountToTransfer
         );
         return "sucsses";
       } else {

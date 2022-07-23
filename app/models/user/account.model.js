@@ -1,3 +1,4 @@
+import uniqid from "uniqid";
 import mongoose from "mongoose";
 import { resolve } from "path";
 import { accountSchema } from "./account.schema.js";
@@ -29,7 +30,7 @@ accountSchema.statics.decreaseUserAccount = function (
     { $inc: { cash: -transferAmount } }
   );
 };
-accountSchema.statics.pushToMovements = function (
+accountSchema.statics.pushToUserMovements = function (
   userAccount,
   transferAmount,
   accountToTransfer = 9999
@@ -40,17 +41,41 @@ accountSchema.statics.pushToMovements = function (
     action: typeOfAction,
     amount: transferAmount,
     transfer_acc: accountToTransfer,
+    tracking_Id: uniqid.time(),
   };
+
   return this.findOneAndUpdate(
     { accountNum: userAccount },
     {
-      $inc: { cash: -transferAmount },
       $push: {
         tracking_Mov: movementObj,
       },
     }
   );
 };
+
+accountSchema.statics.pushToTransferMovements = function (
+  userAccount,
+  transferAmount,
+  accountToTransfer
+) {
+  const movementObj = {
+    action: "התקבל",
+    amount: transferAmount,
+    transfer_acc: userAccount,
+    tracking_Id: uniqid.time(),
+  };
+
+  return this.findOneAndUpdate(
+    { accountNum: accountToTransfer },
+    {
+      $push: {
+        tracking_Mov: movementObj,
+      },
+    }
+  );
+};
+
 // tracking_Mov: [
 //   {
 //     tracking_Id: { type: Number },
