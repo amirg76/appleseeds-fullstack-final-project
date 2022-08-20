@@ -56,7 +56,7 @@ const NewForm = ({ inputs, title, type }) => {
       ? setInputValues({ ...inputValues, [name]: value })
       : setInputAcc({ ...inputAcc, [name]: value });
   };
-  //submit form
+  //submit form/
   const submitForm = async (e) => {
     e.preventDefault();
     let options = "";

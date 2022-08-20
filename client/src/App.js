@@ -25,7 +25,7 @@ function App() {
   return (
     // <div className="main-app">
     <div className={dark ? "main-app dark" : "main-app"}>
-      <BrowserRouter forceRefresh={true}>
+      <BrowserRouter >
         <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/contect" exact component={ContectUs} />
