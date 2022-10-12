@@ -51,3 +51,17 @@ I use JWT to AUTHENTICATION users and protect routes with TOKENS in LOCAL STORAG
 - REACT MATERIAL-UI
 - REACT ROUTER
 - API METHODS
+---
+## App Link
+[Bank App](https://amirg-final-project.herokuapp.com/)
+---
+
+## Contributors
+
+- Amir Gilboa <amirg76@gmail.com>
+
+---
+
+### License & copyright
+
+© Amir Gilboa , Fullstack Developer
