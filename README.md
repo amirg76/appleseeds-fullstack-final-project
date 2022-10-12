@@ -52,6 +52,10 @@ I use JWT to AUTHENTICATION users and protect routes with TOKENS in LOCAL STORAG
 - REACT ROUTER
 - API METHODS
 ---
+#### How To Login
+- admin-- user:admin@admin.com password:password
+- user-- user:mmm@ggg.com password:password
+
 ## App Link
 [Bank App](https://amirg-final-project.herokuapp.com/)
 ---
