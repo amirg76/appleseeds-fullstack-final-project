@@ -57,7 +57,7 @@ I use JWT to AUTHENTICATION users and protect routes with TOKENS in LOCAL STORAG
 - user-- user:mmm@ggg.com password:password
 
 ## App Link
-[Bank App](https://bank-api-front.onrender.com/))
+[Bank App](https://bank-api-front.onrender.com/)
 ---
 
 ## Contributors
